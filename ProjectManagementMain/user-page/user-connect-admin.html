@@ -146,24 +146,23 @@
         class="card border-dark mb-3 userMessageContent"
         style="min-width: 18rem; margin-top: 20px; color: #0e2b63"
       >
-        <div class="card-header">Send Message Here</div>
-
-        <div id="messages"></div>
-        <div id="sendMessage" class="message-content">
-          <input
-            type="text"
-            id="msgTxt"
-            class="msgContentPlace"
-            placeholder="Send your message"
-          />
-          <input
-            type="submit"
-            id="msgBtn"
-            class="msgButtonStyle"
-            value="send"
-            onclick="module.sendMessage()"
-          />
-        </div>
+      <div class="card-header">Send Message Here</div>
+      <div id="messages"></div>
+      <div id="sendMessage" class="message-content">
+        <input
+          type="text"
+          id="msgTxt"
+          class="msgContentPlace"
+          placeholder="Send your message"
+        />
+        <input
+          type="submit"
+          id="msgBtn"
+          class="msgButtonStyle"
+          value="Send"
+          onclick="sendMessage()"
+        />
+      </div>
       </div>
     </main>
 
@@ -205,46 +204,7 @@
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
 
-      var msgTxt = document.getElementById("msgTxt");
-      var sender;
-
-      if (sessionStorage.getItem("sender")) {
-        sender = sessionStorage.getItem("sender");
-      } else {
-        sender = prompt("Enter your name");
-        sessionStorage.setItem("sender", sender);
-      }
-      module.sendMessage = function sendMessage() {
-        var msg = msgTxt.value;
-        var timestamp = new Date().getTime();
-        set(ref(db, "messages/" + timestamp), {
-          msg: msg,
-          sender: sender,
-        });
-      };
-
-      // To recieve
-
-      onChildAdded(ref(db, "messages"), (data) => {
-        if (data.val().sender == sender) {
-          messages.innerHTML +=
-            "<div id=myMsgJustify class=outer id=" +
-            data.key +
-            "><div id=inner class=me>you : " +
-            data.val().msg +
-            "</div></div>";
-        } else {
-          messages.innerHTML +=
-            "<div class=outer id=" +
-            data.key +
-            "><div id=inner class=notme>: " +
-            data.val().sender +
-            " : " +
-            data.val().msg +
-            "</div></div>";
-        }
-      });
-
+      
       // TO delete message
 
       function getUrlParameter(name) {
@@ -291,7 +251,110 @@
       if (userId && ViewRenderedServiceslink) {
         ViewRenderedServiceslink.href = 'user-view-rendered-services.html?uid=' + userId;
       }
-      
+
+     
+      const userRef = ref(db, `Users/${userId}`); // Change dbRef to ref
+
+      const currentUserID = "userID1"; // Replace with actual user ID
+
+      // Function to send messages
+      function sendMessage() {
+        var msgTxt = document.getElementById("msgTxt");
+        var message = msgTxt.value.trim();
+
+        if (message !== "") {
+          var timestamp = new Date().getTime();
+          set(ref(db, `users/${currentUserID}/messages/${timestamp}`), {
+            message: message,
+            sender: currentUserID,
+          }).then(() => {
+            msgTxt.value = ""; // Clear the message input after sending
+          }).catch((error) => {
+            console.error("Error sending message:", error);
+          });
+        }
+      }
+            // To recieve
+
+      onChildAdded(ref(db, "messages"), (data) => {
+        if (data.val().sender == sender) {
+          messages.innerHTML +=
+            "<div id=myMsgJustify class=outer id=" +
+            data.key +
+            "><div id=inner class=me>you : " +
+            data.val().msg +
+            "</div></div>";
+        } else {
+          messages.innerHTML +=
+            "<div class=outer id=" +
+            data.key +
+            "><div id=inner class=notme>: " +
+            data.val().sender +
+            " : " +
+            data.val().msg +
+            "</div></div>";
+        }
+      });
+
+
+
+
+
+
+// Assuming you have initialized Firebase and acquired the database reference (db)
+const userId = "12345"; // Replace this with the actual user ID
+const adminId = "5678"; // Replace this with the actual admin ID
+
+// Reference to the user's messages
+const userMessagesRef = db.ref(`Users/${userId}/messages`);
+
+// Reference to the admin's messages
+const adminMessagesRef = db.ref(`Users/${adminId}/messages`);
+
+// Reference to the HTML element where messages will be displayed
+const messagesContainer = document.getElementById("messages");
+
+// Function to add a message to the UI
+function addMessageToUI(data) {
+    messagesContainer.innerHTML += `<div>${data.sender}: ${data.message}</div>`;
+}
+
+// Function to send a message
+function sendMessage() {
+    const messageInput = document.getElementById("msgBtn");
+    const message = messageInput.value.trim();
+
+    if (message !== "") {
+        const timestamp = firebase.database.ServerValue.TIMESTAMP;
+
+        // Send a message from the user to the admin
+        userMessagesRef.push({
+            sender: userId,
+            message,
+            timestamp,
+        });
+
+        // You can also add the message to the admin's messages
+        // adminMessagesRef.push({ sender: userId, message, timestamp });
+
+        messageInput.value = ""; // Clear the input field
+    }
+}
+
+// Set up a real-time listener for the user's messages
+userMessagesRef.on("child_added", (snapshot) => {
+    const messageData = snapshot.val();
+    addMessageToUI({ sender: "User", message: messageData.message });
+});
+
+// Set up a real-time listener for the admin's messages
+adminMessagesRef.on("child_added", (snapshot) => {
+    const messageData = snapshot.val();
+    addMessageToUI({ sender: "Admin", message: messageData.message });
+});
+
+
+
     </script>
   </body>
 </html>

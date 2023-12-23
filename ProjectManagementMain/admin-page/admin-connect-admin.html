@@ -238,10 +238,7 @@
         }
       });
 
-      // TO delete message
-      module.dltMsg = function dltMsg(key) {
-        remove(ref(db, "messages/" + key));
-      };
+
 
       // When message is deleted
       onChildRemoved(ref(db, "messages"), (data) => {

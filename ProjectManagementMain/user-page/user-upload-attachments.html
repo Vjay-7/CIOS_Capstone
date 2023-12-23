@@ -194,20 +194,17 @@
             <div class="card-body">
               <h5 class="card-title user-full-name" id="fullname">Loading</h5>
               <ul class="list-group list-group-horizontal-xxl">
-                <li class="list-group-item">Status:
-                  <span class="user-profile-decorate user-scholar-status" id="statusS"
-                  >Loading</span
-                >
+                <li class="list-group-item">
+                  <span class="text-muted">Status:</span>
+                  <span class="user-profile-decorate user-scholar-status" id="statusS">Loading</span>
                 </li>
-                <li class="list-group-item">School Year:
-                  <span class="user-profile-decorate user-scholar-acadyear" id="schoolyearS"
-                >Loading</span
-              >
+                <li class="list-group-item">
+                  <span class="text-muted">School Year:</span>
+                  <span class="user-profile-decorate user-scholar-acadyear" id="schoolyearS">Loading</span>
                 </li>
-
-                <li class="list-group-item">Program:              <span class="user-profile-decorate user-scholar-program" id="programS"
-                  >Loading</span
-                >
+                <li class="list-group-item">
+                  <span class="text-muted">Program:</span>
+                  <span class="user-profile-decorate user-scholar-program" id="programS">Loading</span>
                 </li>
               </ul>
             </div>
@@ -216,14 +213,78 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title user-upload-title">
+          <h5 class="card-title user-upload-title text-center mb-4" style="border-bottom: 2px solid #ffb703;;">
             Upload Your Requirements Here
           </h5>
           <form action="">
-            <div class="mb-3">
-              <label for="formFileGrades" class="form-label">Add a Copy of Your Complete Grades</label>
-              <input class="form-control" type="file" id="formFileGrades" onchange="chooseFile('grades')" />
+            <div class="modal-body">
+              <!-- Grades Section -->
+              <div class="mb-4">
+                <h2 class="card-title user-upload-title" >Grades</h2>
+                <button type="button" class="btn btn-primary mb-3" id="submitGradesBtn" data-bs-toggle="modal" data-bs-target="#gradesInputModal">Submit Grades</button>
+                <!-- Grades Input Modal -->
+                <div class="modal fade" id="gradesInputModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <style>
+                      /* Custom CSS to increase modal width */
+                     .custom-modal-content {
+                      width: 120vw; /* Set your desired width using vw */
+                      margin-left: calc((100vw - 120vw) / 2); /* Center the wider content */
+                    }
+                    </style>
+                    <div class="modal-content custom-modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter Grades</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+                        <!-- Inputs for Grades -->
+                        <form id="gradesForm">
+                          <div class="modal-body">
+                            <!-- Grades Section -->
+                            <div class="mb-4">
+                              <h2>Grades</h2>
+                              <!-- Table for Grades -->
+                              <table class="table" id="gradesTable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Units</th>
+                                    <th scope="col">Grade</th>                                
+    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <!-- Existing or dynamically added rows go here -->
+                             
+                                </tbody>
+                              </table>
+                              <!-- Add Subject Button -->
+                              <button type="button" class="btn btn-secondary mt-3" id="addSubjectBtn">Add Subject</button>
+                          
+                              <!-- File Upload -->
+                              <div class="mb-3">
+                                <label for="formFileGrades" class="form-label">Add a Copy of Your Complete Grades</label>
+                                <input class="form-control" type="file" id="formFileGrades" onchange="chooseFile('grades')" />
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="saveGradesBtn">Save Grades</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Overall GWA -->
+                <p>Overall GWA: <span id="overallGWA">--</span></p>
+              </div>
             </div>
+            
 
             <div class="mb-3">
               <label for="formFileServices" class="form-label">Add a Copy of Your Rendered Services</label>
@@ -253,19 +314,122 @@
     import {getDatabase, ref as dbRef , set, get} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
     import { getStorage, ref, uploadBytes, list, getDownloadURL, listAll    } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
 
-    // Initialize Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
-        authDomain: "coisprojectmain.firebaseapp.com",
-        projectId: "coisprojectmain",
-        storageBucket: "coisprojectmain.appspot.com",
-        messagingSenderId: "666040501925",
-        appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
+ // Initialize Firebase
+ const firebaseConfig = {
+      apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
+      authDomain: "coisprojectmain.firebaseapp.com",
+      projectId: "coisprojectmain",
+      storageBucket: "coisprojectmain.appspot.com",
+      messagingSenderId: "666040501925",
+      appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
     };
 
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const storage = getStorage(app);
+  
+    document.addEventListener('DOMContentLoaded', function () {
+        const saveGradesBtn = document.getElementById('saveGradesBtn'); // Add an ID to your Save Grades button
+        
+        saveGradesBtn.addEventListener('click', async function () {
+         
+        });
+
+
+        let subjectCount = 0; 
+        addSubjectBtn.addEventListener('click', function () {
+          const userId = getUrlParameter('uid');
+          
+          const newRow = document.createElement('tr');
+          newRow.innerHTML = `
+            <td>
+              <input type="text" class="form-control subject-input" id="subjectN${subjectCount}" placeholder="Enter Subject Name">
+            </td>
+            <td>
+              <select class="form-select unit-select" id="unitselect${subjectCount}">
+                <option value="" selected>Select Units</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+                <!-- Add more units as needed -->
+              </select>
+            </td>
+            <td>
+              <select class="form-select grade-select" placeholder="Select Grade" id="gradeSelect${subjectCount}">
+                <option value="" selected>Select Grade</option>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <!-- Add other grade options -->
+              </select>
+            </td>
+          `;
+
+          gradesTable.querySelector('tbody').appendChild(newRow);
+
+          const subjectName = document.getElementById(`subjectN${subjectCount}`).value;
+          const unitSelect = document.getElementById(`unitselect${subjectCount}`).value;
+          const gradeSelect = document.getElementById(`gradeSelect${subjectCount}`).value;
+
+          if (subjectName && unitSelect && gradeSelect) {
+            const subjectData = {
+              subject: subjectName,
+              unit: unitSelect,
+              grade: gradeSelect,
+            };
+
+            const db = getDatabase();
+            const subjectRef = dbRef(db, `Grades/${userId}/sub${subjectCount}`); // Reference to the subject count folder
+
+            set(subjectRef, subjectData)
+              .then(() => {
+                console.log(`Subject ${subjectName} data saved to Firebase under sub${subjectCount}`);
+                alert(`Subject ${subjectName} data saved successfully!`);
+                subjectCount++; // Increment the subject count for the next entry
+              })
+              .catch((error) => {
+                console.error('Error saving subject data:', error);
+                alert('Failed to save subject data. Please check your connection and try again.');
+              });
+          } else {
+            alert('Please fill in all fields before adding a subject.');
+          }
+        });
+
+
+        // Handle overall GWA calculation
+        // // Example: Listen for a button click to calculate GWA
+        // document.getElementById('calculateGWAButton').addEventListener('click', function () {
+        //   const subjectInputs = document.querySelectorAll('.subject-input');
+        //   const gradeSelects = document.querySelectorAll('.grade-select');
+        //   const unitSelects = document.querySelectorAll('.unit-select');
+
+        //   gradesData = [];
+
+        //   subjectInputs.forEach((subjectInput, index) => {
+        //     const subject = subjectInput.value;
+        //     const grade = gradeSelects[index].value;
+        //     const unit = unitSelects[index].value;
+
+        //     // Store data to Firebase or your preferred database here
+        //     gradesData.push({ subject, grade, unit });
+        //   });
+
+        //   // Calculate and display overall GWA
+        //   const calculatedGWA = calculateGWA(gradesData);
+        //   overallGWASpan.textContent = calculatedGWA.toFixed(2); // Display GWA with two decimal places
+        // });
+  });
+
+
+// // Function to calculate GWA
+// function calculateGWA(grades) {
+//   // Your GWA calculation logic here
+//   return calculatedGWA;
+// }
+
+
+
 
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -275,7 +439,7 @@
     }
 
         // Fetch user data
-        function fetchUserData() {
+    function fetchUserData() {
         const userId = getUrlParameter('uid');
         const userRef = dbRef(database, `users/${userId}`);
 
@@ -319,9 +483,9 @@
             console.error('Error fetching user data:', error);
         });
     }
+        fetchUserData();
 
-    fetchUserData();
-
+    
     function chooseFile(type) {
         const fileInput = document.getElementById(
           type === 'profile' ? 'profilePictureInput' : type === 'grades' ? 'formFileGrades' : 'formFileServices'
@@ -362,7 +526,7 @@
 
       
     // Event listener for the file input change
-  const fileInputs = document.querySelectorAll('input[type="file"]');
+    const fileInputs = document.querySelectorAll('input[type="file"]');
     fileInputs.forEach((fileInput) => {
       fileInput.addEventListener('change', (event) => {
         const fileType = event.target.id === 'formFileGrades' ? 'grades' : event.target.id === 'formFileServices' ? 'services' : 'profile';
@@ -399,10 +563,20 @@
           console.error('Error listing files:', error);
         });
     }
-
-    // Call the function to update the profile picture
+ // Call the function to update the profile picture
     updateProfilePicture();
+ 
 
+
+////// Display Text for grade select
+const gradeSelect = document.getElementById('gradeSelect');
+gradeSelect.addEventListener('change', function () {
+  const selectedOption = this.options[this.selectedIndex];
+  const selectedColor = selectedOption.style.color;
+
+  // Set the color of the selected text
+  this.style.color = selectedColor;
+});
 
 
 

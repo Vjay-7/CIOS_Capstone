@@ -119,7 +119,7 @@
       <nav aria-label="breadcrumb" style="margin-left: 10px">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="user-dashboard-main.html">Dashboard</a>
+            <a href="admin-dashboard-main.html">Dashboard</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Browse Service
@@ -134,69 +134,9 @@
           href="#"
           >All</a
         >
-        <a class="nav-link nav-hover-contentA" href="#">Active</a>
-        <a class="nav-link nav-hover-contentA" href="#">Inactive</a>
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
       </nav>
 
       <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-left: 1px">
-        <div class="col">
-          <div class="card admin-browse-content1">
-            <img
-              src="../image-source/rendered-service-poster1.png"
-              class="card-img-top rendered-service-poster1"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title admin-browse-title-1">#JustHere</h5>
-              <p class="card-text admin-notif-text-render">
-                #JustHere is a social media campaign that aims to raise mental
-                health awareness among Oro Scholars and social media users.
-              </p>
-
-              <button
-                type="button"
-                id="justHereButton"
-                class="btn btn-primary admin-notif-btn-render"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop-content1"
-                data-bs-content="content1"
-              >
-                View More Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card admin-browse-content1">
-            <img
-              src="../image-source/rendered-service-poster1.png"
-              class="card-img-top rendered-service-poster1"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title admin-browse-title-1">
-                CELEBRATE HIGALAAY 🎉
-              </h5>
-              <p class="card-text admin-notif-text-render">
-                Explore the many festivities the city has to offer in lieu of
-                the month-long celebration of Higalaay Festival and share your
-                stories.
-              </p>
-
-              <button
-                type="button"
-                id="celebrateHigalaayButton"
-                class="btn btn-primary admin-notif-btn-render"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop-content1"
-                data-bs-content="content2"
-              >
-                View More Details
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Button trigger modal -->
@@ -204,8 +144,6 @@
       <!-- Modal -->
     </main>
 
-    <!-- Feed Post Modal -->
-    <!-- Modal -->
     <div
       class="modal fade modal-dialog-scrollable"
       id="staticBackdrop-content1"
@@ -215,255 +153,120 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">
-              Rendered Service
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">
+            Rendered Service Opportunity
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
 
-          <div class="content-imagesize">
-            <div id="carouselExampleIndicators" class="carousel slide">
-              <div class="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="0"
-                  class="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img
-                    src="../image-source/adminnotif1.jpg"
-                    class="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="../image-source/adminnotif2.jpg"
-                    class="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="../image-source/adminnotif3.jpg"
-                    class="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-              </div>
+        <div class="content-imagesize">
+          <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
               <button
-                class="carousel-control-prev"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
               <button
-                class="carousel-control-next"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
             </div>
-          </div>
-
-          <div class="card admin-rendered-content">
-            <div class="card-header admin-notif-contenttitle">
-              Rendered Service Opportunity
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="../image-source/adminnotif1.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                  id="rendered-image-reference-1"
+                />
+              </div>     
             </div>
-            <div class="card-body">
-              <blockquote class="blockquote mb-0">
-                <p>
-                  #JustHere is a social media campaign that aims to raise mental
-                  health awareness among Oro Scholars and social media users.
-                  This campaign highlights experiences of inspiration,
-                  encouragement, hope, and positivity of people who were just
-                  there for them during these trying times. As a result, we are
-                  hoping to create a social media news feed that speaks about
-                  holding on to the sanctity and sacredness of one’s life and
-                  the importance of social support in mental health.
-                </p>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="modal-body">
-            <div class="card form-rendered-service">
-              <div class="card-header">
-                Fill up this form if you are able to join
-              </div>
-              <div class="card-body">
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Email address</label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                    <div id="emailHelp" class="form-text">
-                      We'll never share your email with anyone else.
-                    </div>
-                  </div>
-
-                  <div class="input-group">
-                    <span class="input-group-text"
-                      >First Name and Last Name</span
-                    >
-                    <input
-                      type="text"
-                      aria-label="First Name"
-                      class="form-control"
-                    />
-                    <input
-                      type="text"
-                      aria-label="Last Name"
-                      class="form-control"
-                    />
-                  </div>
-
-                  <div class="input-group mb-3 admin-group-choices">
-                    <label class="input-group-text" for="inputGroupSelect01"
-                      >School</label
-                    >
-                    <select class="form-select" id="inputGroupSelect01">
-                      <option selected>Choose Here...</option>
-                      <option value="1">PHINMA Cagayan de Oro College</option>
-                      <option value="2">Capitol University</option>
-                      <option value="3">Lourdes College</option>
-                      <option value="4">Liceo de Cagayan University</option>
-                      <option value="5">Pilgrim Christian College</option>
-                      <option value="6">Southern Philippine College</option>
-                      <option value="7">STI College</option>
-                      <option value="8">Xavier University</option>
-                      <option value="9">USTP CDO</option>
-                    </select>
-                  </div>
-
-                  <div class="input-group mb-3 admin-group-choices">
-                    <label class="input-group-text" for="inputGroupSelect01"
-                      >Year</label
-                    >
-                    <select class="form-select" id="inputGroupSelect01">
-                      <option selected>Choose Here...</option>
-                      <option value="1">First Year</option>
-                      <option value="2">Second Year</option>
-                      <option value="3">Third Year</option>
-                      <option value="4">Fourth Year</option>
-                    </select>
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <span
-                      class="input-group-text"
-                      id="inputGroup-sizing-default"
-                      >Barangay</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-default"
-                    />
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <span
-                      class="input-group-text"
-                      id="inputGroup-sizing-default"
-                      >Contact Number</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-default"
-                    />
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="inputGroupFile02"
-                    />
-                    <label class="input-group-text" for="inputGroupFile02"
-                      >Upload</label
-                    >
-                  </div>
-                  <div id="emailHelp" class="form-text">
-                    Upload here your picture for proof of entry
-                  </div>
-
-                  <div class="mb-3 form-check">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Check me out</label
-                    >
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
             <button
+              class="carousel-control-prev"
               type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
             >
-              Close
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
             </button>
-            <button type="button" class="btn btn-primary">Understood</button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
+        </div>
+
+        <div class="card admin-rendered-content">
+          <div id="rendered-service-title" class="card-header admin-notif-contenttitle">
+            Rendered Service Opportunity
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p id="rendered-service-content-text">
+                ...
+              </p>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="card border-success" style="margin: 15px">
+          <div class="card-header">Render Service</div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              Where:
+              <p id="renderedService-where">...</p>
+            </li>
+            <li class="list-group-item">
+              When:
+              <p id="renderedService-when"></p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+          >
+          Understood
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- For Create Post -->
+    </div>
     
     </div>
 
@@ -473,42 +276,10 @@
       crossorigin="anonymous"
     ></script>
 
-    <script>
-      const exampleModal = document.getElementById("staticBackdrop-content1");
-      const modalTitle = exampleModal.querySelector(".modal-title");
-      const modalContentTitle = exampleModal.querySelector(
-        ".admin-notif-contenttitle"
-      );
-      const modalImages = exampleModal.querySelectorAll(
-        ".content-imagesize img"
-      );
-
-      if (exampleModal) {
-        exampleModal.addEventListener("show.bs.modal", (event) => {
-          // Button that triggered the modal
-          const button = event.relatedTarget;
-          // Extract the unique identifier from data-bs-content attribute
-          const contentIdentifier = button.getAttribute("data-bs-content");
-
-          // Update the modal's content based on the identifier
-          if (contentIdentifier === "content1") {
-            modalTitle.textContent = "Rendered Service - #JustHere";
-            modalContentTitle.textContent = "#JustHere";
-            // Update image sources as needed
-            modalImages[0].src = "../image-source/adminnotif1.jpg";
-            modalImages[1].src = "../image-source/adminnotif2.jpg";
-            modalImages[2].src = "../image-source/adminnotif3.jpg";
-          } else if (contentIdentifier === "content2") {
-            modalTitle.textContent = "Rendered Service - CELEBRATE HIGALAAY 🎉";
-            modalContentTitle.textContent = "CELEBRATE HIGALAAY 🎉 ";
-            // Update image sources as needed
-            modalImages[0].src = "../image-source/adminnotif2A.jpg";
-            modalImages[1].src = "../image-source/adminnotif2B.jpg";
-            modalImages[2].src = "../image-source/adminnotif2C.jpg";
-          }
-        });
-      }
-
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+      import {getDatabase, set, ref, child, onValue, get} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+      import { getStorage, ref as dbRef, uploadBytes, list, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
 
       function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -519,6 +290,141 @@
     
       var userId = getUrlParameter('uid');
     
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
+        authDomain: "coisprojectmain.firebaseapp.com",
+        projectId: "coisprojectmain",
+        storageBucket: "coisprojectmain.appspot.com",
+        messagingSenderId: "666040501925",
+        appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const storage = getStorage(app);
+     
+//////////// POST STATIC DISPLAY FROM FIREBASE
+      document.addEventListener("DOMContentLoaded", function () {
+      const database = getDatabase(app);
+      const postsRef = ref(database, 'posts'); // Reference to the 'posts' node in Firebase
+      
+      
+      // Fetch data from Firebase
+      onValue(postsRef, (snapshot) => {
+        const posts = snapshot.val(); // Retrieved posts from Firebase
+
+        // Get the container where you want to display the posts
+        const cardContainer = document.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
+
+      // Function to format text content with line breaks and clickable links
+        function formatText(text) {
+          const formattedText = text
+            .split('\n')
+            .map((line) => {
+              if (line.match(/https?:\/\/[^\s]+/)) {
+                return `<p>${linkify(line)}</p>`;
+              }
+              return `<p>${line}</p>`;
+            })
+            .join('');
+
+          return formattedText;
+        }
+      
+   // Loop through the posts
+    for (const key in posts) {
+          const postData = posts[key]; // Retrieve individual post data
+
+          // Create HTML elements dynamically and populate them with fetched data
+          const newCard = document.createElement('div');
+          newCard.className = 'col';
+          newCard.innerHTML = `
+            <div class="card admin-browse-content1">
+              <img src="../image-source/rendered-service-poster1.png" class="card-img-top rendered-service-poster1" alt="...">
+              <div class="card-body">
+                <h5 class="card-title admin-browse-title-1">${postData.title}</h5>
+                <p class="card-text admin-notif-text-render">${postData.when}</p>
+                <!-- Add other HTML elements here to display more data -->
+                <button type="button" class="btn btn-primary admin-notif-btn-render" data-bs-toggle="modal" data-bs-target="#staticBackdrop-content1" data-bs-content="${key}">View More Details</button>
+              
+              </div>
+            </div>
+          `;
+
+          // Append the newly created card to the card container
+          cardContainer.appendChild(newCard);
+          // Call the function to update the profile picture
+          
+
+            // Add event listener to the 'View More Details' button
+          newCard.querySelector('.admin-notif-btn-render').addEventListener('click', function() {
+            // Update modal content with Firebase data
+            document.getElementById('rendered-service-title').innerText = postData.title;
+            document.getElementById('rendered-service-content-text').innerHTML = postData.content; // You can set the content here
+            document.getElementById('renderedService-where').innerText = postData.where;
+            document.getElementById('renderedService-when').innerText = postData.when;
+          postPicture(key);
+          });
+        }
+
+
+        function postPicture(number) {
+        console.log(number);
+        const storageRef = dbRef(storage, `posts/${number}`);
+
+        listAll(storageRef)
+          .then((res) => {
+            if (res.items.length > 0) {
+              // Sort items by their metadata (creation time)
+              const sortedItems = res.items.sort((a, b) => b.timeCreated - a.timeCreated);
+
+              // Get the most recent item (first item after sorting)
+              const mostRecentItem = sortedItems[0];
+
+              // Fetch download URL for the most recent item
+              getDownloadURL(mostRecentItem).then((url) => {
+                const profilePic = document.getElementById('rendered-image-reference-1');
+                profilePic.src = url;
+              });
+            } else {
+              console.error('No images found in the folder');
+            }
+          })
+          .catch((error) => {
+            console.error('Error listing files:', error);
+          });
+      }
+      });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       console.log('User ID:', userId); 
       var notificationLink = document.getElementById('notificationLink');
       var dashboardlink = document.getElementById('dashboardlink');

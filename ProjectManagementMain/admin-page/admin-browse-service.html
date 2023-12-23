@@ -128,68 +128,20 @@
           href="#"
           >All</a
         >
-        <a class="nav-link nav-hover-contentA" href="#">Active</a>
-        <a class="nav-link nav-hover-contentA" href="#">Inactive</a>
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         <button
           type="button"
           class="btn btn-primary admin-browse-btn1"
           data-bs-toggle="modal"
           data-bs-target="#staticBackdrop-createrender"
-        >
+          >
           <i class="bx bx-plus" style="font-size: 20px"></i> Create Rendered
           Service
         </button>
       </nav>
 
       <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-left: 1px">
-        <div class="col">
-          <div class="card admin-browse-content1">
-            <img
-              src="../image-source/rendered-service-poster1.png"
-              class="card-img-top rendered-service-poster1"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5
-                class="card-title admin-browse-title-1"
-                id="rendered-service-title"
-              >
-                #JustHere
-              </h5>
-              <p
-                class="card-text admin-notif-text-render"
-                id="rendered-service-content-text"
-              >
-                #JustHere is a social media campaign that aims to raise mental
-                health awareness among Oro Scholars and social media users.
-              </p>
-
-              <button
-                type="button"
-                id="rendered-service-reference-view-content"
-                class="btn btn-primary admin-notif-btn-render"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop-content1"
-                data-bs-content="content1"
-              >
-                View More Details
-              </button>
-
-              <button
-                type="button"
-                class="btn btn-primary admin-button-delete-itemrendered"
-                data-bs-toggle="modal"
-                data-bs-target="#questionToDelete"
-              >
-                <i class="bx bx-trash"></i> Delete Item
-              </button>
-            </div>
-          </div>
-        </div>
+        
       </div>
-
-      <!-- Button trigger modal -->
 
       <!-- Modal -->
     </main>
@@ -211,8 +163,8 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="rendered-service-title">
-              Rendered Service
+            <h1 class="modal-title fs-5">
+              Rendered Service Opportunity
             </h1>
             <button
               type="button"
@@ -249,28 +201,12 @@
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img
-                    src="../image-source/adminnotif1.jpg"
+                    src="..."
                     class="d-block w-100"
                     alt="..."
                     id="rendered-image-reference-1"
                   />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="../image-source/adminnotif2.jpg"
-                    class="d-block w-100"
-                    alt="..."
-                    id="rendered-image-reference-2"
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="../image-source/adminnotif3.jpg"
-                    class="d-block w-100"
-                    alt="..."
-                    id="rendered-image-reference-3"
-                  />
-                </div>
+                </div>     
               </div>
               <button
                 class="carousel-control-prev"
@@ -300,31 +236,24 @@
           </div>
 
           <div class="card admin-rendered-content">
-            <div class="card-header admin-notif-contenttitle">
+            <div id="rendered-service-title" class="card-header admin-notif-contenttitle">
               Rendered Service Opportunity
             </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
                 <p id="rendered-service-content-text">
-                  #JustHere is a social media campaign that aims to raise mental
-                  health awareness among Oro Scholars and social media users.
-                  This campaign highlights experiences of inspiration,
-                  encouragement, hope, and positivity of people who were just
-                  there for them during these trying times. As a result, we are
-                  hoping to create a social media news feed that speaks about
-                  holding on to the sanctity and sacredness of one’s life and
-                  the importance of social support in mental health.
+                  ...
                 </p>
               </blockquote>
             </div>
           </div>
 
           <div class="card border-success" style="margin: 15px">
-            <div class="card-header">Rendered Service</div>
+            <div class="card-header">Render Service</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 Where:
-                <p id="renderedService-where">Greenheights</p>
+                <p id="renderedService-where">...</p>
               </li>
               <li class="list-group-item">
                 When:
@@ -333,147 +262,19 @@
             </ul>
           </div>
 
-          <div class="modal-body">
-            <div class="card form-rendered-service">
-              <div class="card-header">
-                Fill up this form if you are able to join
-              </div>
-              <div class="card-body">
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Email address</label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                    <div id="emailHelp" class="form-text">
-                      We'll never share your email with anyone else.
-                    </div>
-                  </div>
-
-                  <div class="input-group">
-                    <span class="input-group-text"
-                      >First Name and Last Name</span
-                    >
-                    <input
-                      type="text"
-                      aria-label="First Name"
-                      class="form-control"
-                    />
-                    <input
-                      type="text"
-                      aria-label="Last Name"
-                      class="form-control"
-                    />
-                  </div>
-
-                  <div class="input-group mb-3 admin-group-choices">
-                    <label class="input-group-text" for="inputGroupSelect01"
-                      >School</label
-                    >
-                    <select class="form-select" id="inputGroupSelect01">
-                      <option selected>Choose Here...</option>
-                      <option value="1">PHINMA Cagayan de Oro College</option>
-                      <option value="2">Capitol University</option>
-                      <option value="3">Lourdes College</option>
-                      <option value="4">Liceo de Cagayan University</option>
-                      <option value="5">Pilgrim Christian College</option>
-                      <option value="6">Southern Philippine College</option>
-                      <option value="7">STI College</option>
-                      <option value="8">Xavier University</option>
-                      <option value="9">USTP CDO</option>
-                    </select>
-                  </div>
-
-                  <div class="input-group mb-3 admin-group-choices">
-                    <label class="input-group-text" for="inputGroupSelect01"
-                      >Year</label
-                    >
-                    <select class="form-select" id="inputGroupSelect01">
-                      <option selected>Choose Here...</option>
-                      <option value="1">First Year</option>
-                      <option value="2">Second Year</option>
-                      <option value="3">Third Year</option>
-                      <option value="4">Fourth Year</option>
-                    </select>
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <span
-                      class="input-group-text"
-                      id="inputGroup-sizing-default"
-                      >Barangay</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-default"
-                    />
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <span
-                      class="input-group-text"
-                      id="inputGroup-sizing-default"
-                      >Contact Number</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-default"
-                    />
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="inputGroupFile02"
-                    />
-                    <label class="input-group-text" for="inputGroupFile02"
-                      >Upload</label
-                    >
-                  </div>
-                  <div id="emailHelp" class="form-text">
-                    Upload here your picture for proof of entry
-                  </div>
-
-                  <div class="mb-3 form-check">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Check me out</label
-                    >
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </div>
-            </div>
-          </div>
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-primary"
               data-bs-dismiss="modal"
             >
-              Close
+            Understood
             </button>
-            <button type="button" class="btn btn-primary">Understood</button>
           </div>
         </div>
       </div>
+
     </div>
-
-
 
     <!-- For Create Post -->
     <div
@@ -523,9 +324,7 @@
                 />
               </div>
               <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >When</span
-                >
+                <span class="input-group-text" id="inputGroup-sizing-sm">When</span>
                 <input
                   type="datetime-local"
                   id="renderedService-when1"
@@ -534,6 +333,7 @@
                   aria-describedby="inputGroup-sizing-sm"
                 />
               </div>
+              <p id="formattedDateTime"></p>
 
               <div class="mb-3">
                 <label for="exampleFormControlTextarea1" id="rendered-service-content-text" class="form-label"
@@ -546,27 +346,13 @@
                 ></textarea>
               </div>
               <div class="mb-3">
-                <label for="formFileSm" class="form-label"
-                  >Upload Pictures</label
-                >
-                <input
-                  class="form-control form-control-sm"
-                  id="rendered-image-reference-1"
-                  type="file"
-                />
-                <input
-                  class="form-control form-control-sm"
-                  id="rendered-image-reference-2"
-                  type="file"
-                />
-                <input
-                  class="form-control form-control-sm"
-                  id="rendered-image-reference-3"
-                  type="file"
-                />
+                <label for="formFileSm" class="form-label">Upload Pictures</label>
+                <input class="form-control" type="file" id="renderservicefile" />
               </div>
+
             </form>
           </div>
+
           <div class="modal-footer">
             <button
               type="button"
@@ -594,36 +380,6 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">Are you sure to delete the item?</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              id="rendered-service-delete-button"
-            >
-              Yes Confirm
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
 
     <script
@@ -640,7 +396,8 @@
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-      import {getDatabase, set, ref, child, onValue, get} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+      import {getDatabase, set, ref, child, onValue, get, remove } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+      import { getStorage, ref as dbRef, uploadBytes, list, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
 
     // Initialize Firebase
     const firebaseConfig = {
@@ -652,67 +409,275 @@
       appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
     };
 
-    const app = initializeApp (firebaseConfig);
-    const database = getDatabase (app);
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
 
 
-  document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
       const createBrowseButton = document.querySelector(".admin-createbrowse-button");
       const cardRow = document.querySelector(".row.row-cols-1.row-cols-md-3.g-4");
+      const dateTimeInput = document.getElementById('renderedService-when1');
 
-      createBrowseButton.addEventListener("click", function () {
-        const titleInputs = document.querySelectorAll("#rendered-service-title1");
-        const whereInputs = document.querySelectorAll("#renderedService-where1");
-        const whenInputs = document.querySelectorAll("#renderedService-when1");
-        const contentInputs = document.querySelectorAll("#rendered-service-content-text1");
+      // Reference to the posts collection in Firebase
+      const postsRef = ref(database, "posts");
 
-        // Create an array to hold the post data
-        const postsData = [];
-        titleInputs.forEach((titleInput, index) => {
-          const whereInput = whereInputs[index].value || ""; // Ensure there's a default value if it's undefined
-          const whenInput = whenInputs[index].value;
-          const contentInput = contentInputs[index].value;
+      // Declare formattedDateTime outside of the event listeners
+      let formattedDateTime;
 
-          // Check if required inputs are not empty for each post
-          if (titleInput.value && whenInput && contentInput) {
-            postsData.push({
-              title: titleInput.value,
-              where: whereInput,
-              when: whenInput,
-              content: contentInput,
-            });
-          } else {
-            console.error(`Please fill in all required fields for post ${index + 1}`);
-            // You can display an error message to the user or handle the scenario as needed
+      // Event listener for changes in the input value
+      dateTimeInput.addEventListener('change', function() {
+        formattedDateTime = formatDateAndTime(this.value);
+        const formattedDateTimeElement = document.getElementById('formattedDateTime');
+        formattedDateTimeElement.textContent = formattedDateTime;
+        console.log(formattedDateTime);
+      });
+
+      // Assuming createBrowseButton is declared somewhere in your code
+      createBrowseButton.addEventListener("click", async function () {
+        const titleInput = document.querySelector("#rendered-service-title1").value;
+        const whereInput = document.querySelector("#renderedService-where1").value;
+        const whenInput = formattedDateTime; // Now formattedDateTime is accessible here
+        const contentInput = document.querySelector("#rendered-service-content-text1").value;
+        const processedText = processTextForFirebase(contentInput);
+
+        // Create an object to hold the post data
+        const postData = {
+          title: titleInput,
+          where: whereInput,
+          when: whenInput,
+          content: processedText,
+        };
+
+        if (titleInput && whenInput && contentInput) {
+          try {
+            // Get the current count of posts from Firebase
+            const snapshot = await get(postsRef);
+            const postCount = Object.keys(snapshot.val() || {}).length;
+
+            // Push data to Firebase with a unique post ID
+            await set(ref(database, `posts/post${postCount}`), postData);
+            
+            alert("Posted successfully");
+            location.reload();
+
+            // Call the function to handle file selection
+            chooseFile('postpic', postCount);
+
+          } catch (error) {
+            console.error("Error writing document: ", error);
           }
-        });
+        } else {
+          alert("Please fill in all required fields");
+        }
+      });
 
-        // Store the new post data array in Firebase
-        postsData.forEach((postData) => {
-          set(ref(database, "posts/"), postData);
+      // Function to handle the file selection
+      async function chooseFile(type, postCount) {
+        const fileInput = document.getElementById('renderservicefile');
+        const file = fileInput.files[0];
 
-          // Create a new card element with dynamic content for each post
-          const newCard = document.createElement("div");
-          newCard.className = "col";
+        if (file) {
+
+          const storageRef = dbRef(storage, `posts/post${postCount}/${file.name}`);
+          try {
+            const snapshot = await uploadBytes(storageRef, file);
+            console.log(`File (${type}) uploaded successfully for post ${postCount}`);
+
+            // You can get the download URL of the uploaded file here if needed
+            const downloadURL = await getDownloadURL(storageRef);
+            console.log('Download URL:', downloadURL);
+            location.reload();
+          } catch (error) {
+            console.error(`Error uploading file (${type}) for post ${postCount}:`, error);
+          }
+        } else {
+          console.error(`No file selected for (${type})`);
+        }
+  }   
+});
+
+
+//////////// POST STATIC DISPLAY FROM FIREBASE
+    document.addEventListener("DOMContentLoaded", function () {
+      const database = getDatabase(app);
+      const postsRef = ref(database, 'posts'); // Reference to the 'posts' node in Firebase
+
+      
+      // Fetch data from Firebase
+      onValue(postsRef, (snapshot) => {
+        const posts = snapshot.val(); // Retrieved posts from Firebase
+
+        // Get the container where you want to display the posts
+        const cardContainer = document.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
+
+      // Function to format text content with line breaks and clickable links
+        function formatText(text) {
+          const formattedText = text
+            .split('\n')
+            .map((line) => {
+              if (line.match(/https?:\/\/[^\s]+/)) {
+                return `<p>${linkify(line)}</p>`;
+              }
+              return `<p>${line}</p>`;
+            })
+            .join('');
+
+          return formattedText;
+        }
+        
+   // Loop through the posts
+    for (const key in posts) {
+          const postData = posts[key]; // Retrieve individual post data
+
+          // Create HTML elements dynamically and populate them with fetched data
+          const newCard = document.createElement('div');
+          newCard.className = 'col';
           newCard.innerHTML = `
             <div class="card admin-browse-content1">
               <img src="../image-source/rendered-service-poster1.png" class="card-img-top rendered-service-poster1" alt="...">
               <div class="card-body">
                 <h5 class="card-title admin-browse-title-1">${postData.title}</h5>
-                <p class="card-text admin-notif-text-render">${postData.content}</p>
-                <button type="button" class="btn btn-primary admin-notif-btn-render" data-bs-toggle="modal" data-bs-target="#staticBackdrop-content1" data-bs-content="content3">View More Details</button>
-                <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-bs-toggle="modal" data-bs-target="#questionToDelete">
+                <p class="card-text admin-notif-text-render">${postData.when}</p>
+                <!-- Add other HTML elements here to display more data -->
+                <button type="button" class="btn btn-primary admin-notif-btn-render" data-bs-toggle="modal" data-bs-target="#staticBackdrop-content1" data-bs-content="${key}">View More Details</button>
+                <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-post-key="${key}" data-bs-toggle="modal" data-bs-target="#questionToDelete">
                   <i class="bx bx-trash"></i> Delete Item
                 </button>
               </div>
             </div>
           `;
+            
+          // Append the newly created card to the card container
+          cardContainer.appendChild(newCard);
+          // Call the function to update the profile picture
+          
 
-          // Append the new card to the card row for each post
-          cardRow.appendChild(newCard);
-        });
+            // Add event listener to the 'View More Details' button
+          newCard.querySelector('.admin-notif-btn-render').addEventListener('click', function() {
+            // Update modal content with Firebase data
+            document.getElementById('rendered-service-title').innerText = postData.title;
+            document.getElementById('rendered-service-content-text').innerHTML = postData.content; // You can set the content here
+            document.getElementById('renderedService-where').innerText = postData.where;
+            document.getElementById('renderedService-when').innerText = postData.when;
+            postPicture(key);
+          });
+
+          // Attach event listener to the delete button
+          const deleteButton = newCard.querySelector('.admin-button-delete-itemrendered');
+          deleteButton.addEventListener('click', function () {
+            const postKey = this.getAttribute('data-post-key');
+
+            // Reference to the specific post node you want to delete
+            const postRef = ref(database, `posts/${postKey}`);
+
+            // Remove the post from the database
+            remove(postRef)
+              .then(() => {
+                location.reload();
+                alert(`Post deleted successfully.`);
+                // Optionally, add code here for any additional actions after deletion
+              })
+              .catch((error) => {
+                console.error(`Error deleting post ${postKey}: ${error.message}`);
+              });
+          });
+
+          // Append the newly created card to the card container
+          cardContainer.appendChild(newCard);
+        }
+
+
+        function postPicture(number) {
+        console.log("post picture number",number);
+        const storageRef = dbRef(storage, `posts/${number}`);
+
+        listAll(storageRef)
+          .then((res) => {
+            if (res.items.length > 0) {
+              // Sort items by their metadata (creation time)
+              const sortedItems = res.items.sort((a, b) => b.timeCreated - a.timeCreated);
+
+              // Get the most recent item (first item after sorting)
+              const mostRecentItem = sortedItems[0];
+
+              // Fetch download URL for the most recent item
+              getDownloadURL(mostRecentItem).then((url) => {
+                const profilePic = document.getElementById('rendered-image-reference-1');
+                profilePic.src = url;
+              });
+            } else {
+              console.error('No images found in the folder');
+            }
+          })
+          .catch((error) => {
+            console.error('Error listing files:', error);
+          });
+      }
       });
     });
+
+
+
+
+//////////////////////// Function to format the date and time
+
+// Function to convert URLs in text to clickable links
+function linkify(text) {
+      const urlRegex = /(https?:\/\/[^\s]+)/g;
+      return text.replace(urlRegex, (url) => `<a href="${url}" target="_blank">${url}</a>`);
+    }
+
+    function processTextForFirebase(text) {
+      // Convert newlines to <br> tags
+      const textWithBr = text.replace(/\n/g, '<br>');
+
+      // Convert URLs into clickable links and preserve spaces
+      const formattedText = textWithBr
+        .split('\n')
+        .map((line) => {
+          const lineWithLinks = line.match(/https?:\/\/[^\s]+/)
+            ? `<p>${linkify(line)}</p>`
+            : `<p>${line.replace(/ /g, '&nbsp;')}</p>`;
+          return lineWithLinks;
+        })
+        .join('');
+
+      return formattedText;
+}
+
+
+//////////////////////// Function to format the date and time
+    function formatDateAndTime(datetime) {
+      const date = new Date(datetime);
+      const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'
+      ];
+      const month = monthNames[date.getMonth()];
+      const day = ('0' + date.getDate()).slice(-2);
+      const year = date.getFullYear();
+      let hours = date.getHours();
+      const minutes = ('0' + date.getMinutes()).slice(-2);
+      const ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+
+      const formattedDateTime = `${month} ${day}, ${year} Time: ${hours}:${minutes}${ampm}`;
+      return formattedDateTime;
+    }
+
+    // Get the input element
+    const dateTimeInput = document.getElementById('renderedService-when1');
+
+    // Event listener for changes in the input value
+    dateTimeInput.addEventListener('change', function() {
+      const formattedDateTime = formatDateAndTime(this.value);
+      const formattedDateTimeElement = document.getElementById('formattedDateTime');
+      formattedDateTimeElement.textContent = formattedDateTime;
+      console.log(formattedDateTime); 
+    });
+
     </script>
   </body>
 </html>
