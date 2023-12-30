@@ -344,11 +344,10 @@
                   id="rendered-service-content-text1"
                   rows="3"
                 ></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="formFileSm" class="form-label">Upload Pictures</label>
-                <input class="form-control" type="file" id="renderservicefile" />
-              </div>
+                <div class="mb-3">
+                  <label for="formFileSm" class="form-label">Upload Pictures</label>
+                  <input class="form-control" type="file" id="renderservicefile" onchange="chooseFile('postpic', postCount)" />
+                </div>
 
             </form>
           </div>
@@ -433,68 +432,67 @@
         console.log(formattedDateTime);
       });
 
-      // Assuming createBrowseButton is declared somewhere in your code
-      createBrowseButton.addEventListener("click", async function () {
-        const titleInput = document.querySelector("#rendered-service-title1").value;
-        const whereInput = document.querySelector("#renderedService-where1").value;
-        const whenInput = formattedDateTime; // Now formattedDateTime is accessible here
-        const contentInput = document.querySelector("#rendered-service-content-text1").value;
-        const processedText = processTextForFirebase(contentInput);
+    // Assuming createBrowseButton is declared somewhere in your code
+createBrowseButton.addEventListener("click", async function () {
+  const titleInput = document.querySelector("#rendered-service-title1").value;
+  const whereInput = document.querySelector("#renderedService-where1").value;
+  const whenInput = formattedDateTime; // Now formattedDateTime is accessible here
+  const contentInput = document.querySelector("#rendered-service-content-text1").value;
+  const processedText = processTextForFirebase(contentInput);
 
-        // Create an object to hold the post data
-        const postData = {
-          title: titleInput,
-          where: whereInput,
-          when: whenInput,
-          content: processedText,
-        };
+  // Create an object to hold the post data
+  const postData = {
+    title: titleInput,
+    where: whereInput,
+    when: whenInput,
+    content: processedText,
+  };
 
-        if (titleInput && whenInput && contentInput) {
-          try {
-            // Get the current count of posts from Firebase
-            const snapshot = await get(postsRef);
-            const postCount = Object.keys(snapshot.val() || {}).length;
+  if (titleInput && whenInput && contentInput) {
+    try {
+      // Get the current count of posts from Firebase
+      const snapshot = await get(postsRef);
+      const postCount = Object.keys(snapshot.val() || {}).length;
 
-            // Push data to Firebase with a unique post ID
-            await set(ref(database, `posts/post${postCount}`), postData);
-            
-            alert("Posted successfully");
-            location.reload();
+      // Push data to Firebase with a unique post ID
+      await set(ref(database, `posts/post${postCount}`), postData);
 
-            // Call the function to handle file selection
-            chooseFile('postpic', postCount);
+      alert("Posted successfully");
 
-          } catch (error) {
-            console.error("Error writing document: ", error);
-          }
-        } else {
-          alert("Please fill in all required fields");
+      // Call the function to handle file selection
+      await chooseFile('postpic', postCount); // Wait for file upload to finish
+
+      location.reload(); // Reloading after uploading the file might not be necessary, consider removing
+    } catch (error) {
+      console.error("Error writing document: ", error);
+    }
+      } else {
+        alert("Please fill in all required fields");
+      }
+    });
+
+    // Function to handle the file selection
+    async function chooseFile(type, postCount) {
+      const fileInput = document.getElementById('renderservicefile');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const storageRef = dbRef(storage, `posts/post${postCount}/${file.name}`);
+        try {
+          const snapshot = await uploadBytes(storageRef, file);
+          console.log(`File (${type}) uploaded successfully for post ${postCount}`);
+
+          // You can get the download URL of the uploaded file here if needed
+          const downloadURL = await getDownloadURL(storageRef);
+          console.log('Download URL:', downloadURL);
+        } catch (error) {
+          console.error(`Error uploading file (${type}) for post ${postCount}:`, error);
         }
-      });
+      } else {
+        console.error(`No file selected for (${type})`);
+      }
+    }
 
-      // Function to handle the file selection
-      async function chooseFile(type, postCount) {
-        const fileInput = document.getElementById('renderservicefile');
-        const file = fileInput.files[0];
-
-        if (file) {
-
-          const storageRef = dbRef(storage, `posts/post${postCount}/${file.name}`);
-          try {
-            const snapshot = await uploadBytes(storageRef, file);
-            console.log(`File (${type}) uploaded successfully for post ${postCount}`);
-
-            // You can get the download URL of the uploaded file here if needed
-            const downloadURL = await getDownloadURL(storageRef);
-            console.log('Download URL:', downloadURL);
-            location.reload();
-          } catch (error) {
-            console.error(`Error uploading file (${type}) for post ${postCount}:`, error);
-          }
-        } else {
-          console.error(`No file selected for (${type})`);
-        }
-  }   
 });
 
 
