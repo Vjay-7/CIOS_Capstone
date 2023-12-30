@@ -301,6 +301,8 @@ function getUrlParameter(name) {
   const userId = getUrlParameter('uid');
   const userRef = dbRef(database, `users/${userId}`);
 
+  
+
   // Fetch user data
   get(userRef)
     .then((snapshot) => {
@@ -424,13 +426,24 @@ function getUrlParameter(name) {
         });
         }
 
+        document.getElementById("generateUserPDF").addEventListener("click", async () => {
+          const userId = getUrlParameter('uid');
 
-      // Add event listener for the button click
-      document.getElementById("generateUserPDF").addEventListener("click", generatePDF);
+          try {
+            const userSnapshot = await get(dbRef(database, `users/${userId}/status`));
+            const userStatus = userSnapshot.val();
 
-
-    
-      console.log('User ID:', userId); 
+            if (userStatus === "Passed") {
+              generatePDF(); // Call your generatePDF function if status is "Passed"
+            } else {
+              // Display message to user that they cannot generate PDF because of failed status
+              alert("Sorry, you cannot generate the PDF because your status is 'Failed'.");
+            }
+          } catch (error) {
+            console.error("Error fetching user status:", error);
+          }
+        });
+  
       var notificationLink = document.getElementById('notificationLink');
       var dashboardlink = document.getElementById('dashboardlink');
       var ScholarStatuslink = document.getElementById('ScholarStatuslink');
