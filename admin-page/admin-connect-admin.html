@@ -59,7 +59,7 @@
       <div class="sidebar-content">
         <ul class="lists">
           <li class="list">
-            <a href="../admin-page/admin-dashboard-main.html" class="nav-link">
+            <a href="admin-dashboard-main.html" class="nav-link">
               <i class="bx bxs-dashboard icon"></i>
               <span class="link">Dashboard</span>
             </a>
@@ -73,7 +73,7 @@
           <li class="list">
             <a href="admin-notifications.html" class="nav-link">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Notifications</span>
+              <span class="link">Announcements</span>
             </a>
           </li>
           <li class="list">
@@ -82,22 +82,11 @@
               <span class="link">Browse Service</span>
             </a>
           </li>
-          <li class="list">
-            <a href="admin-connect-admin.html" class="nav-link">
-              <i class="bx bx-message-edit icon"></i>
-              <span class="link">Connect Admin</span>
-            </a>
-          </li>
+      
           <li class="list">
             <a href="user-upload-attachments.html" class="nav-link">
-              <i class="bx bx-upload icon"></i>
-              <span class="link">Upload Attachments</span>
-            </a>
-          </li>
-          <li class="list">
-            <a href="user-download.html" class="nav-link">
-              <i class="bx bxs-download icon"></i>
-              <span class="link">Downlaod COE</span>
+              <i class="bx bxs-select-multiple icon"></i>
+              <span class="link">Verify Attachments</span>
             </a>
           </li>
         </ul>
@@ -111,6 +100,7 @@
         </div>
       </div>
     </div>
+
 
     <main class="mt-5 pt-3">
       <p class="user-page-title">
@@ -133,27 +123,12 @@
         </div>
       </div>
 
-      <div
-        class="card border-dark mb-3 userMessageContent"
-        style="min-width: 18rem; margin-top: 20px; color: #0e2b63"
-      >
+      <div class="card border-dark mb-3 userMessageContent" style="min-width: 18rem; margin-top: 20px; color: #0e2b63">
         <div class="card-header">Send Message Here</div>
-
         <div id="messages"></div>
         <div id="sendMessage" class="message-content">
-          <input
-            type="text"
-            id="msgTxt"
-            class="msgContentPlace"
-            placeholder="Send your message"
-          />
-          <input
-            type="submit"
-            id="msgBtn"
-            class="msgButtonStyle"
-            value="send"
-            onclick="module.sendMessage()"
-          />
+          <input type="text" id="msgTxt" class="msgContentPlace" placeholder="Send your message" onkeypress="handleKeyPress(event)" />
+          <input type="submit" id="msgBtn" class="msgButtonStyle" value="send" onclick="module.sendMessage()" />
         </div>
       </div>
     </main>
@@ -162,6 +137,14 @@
 
     <script>
       module = {};
+
+      function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault(); // Prevent the default form submission
+          module.sendMessage(); // Call sendMessage function
+          document.getElementById('msgTxt').value = ''; // Clear the input field after sending the message
+        }
+      }
     </script>
 
     <script
@@ -198,46 +181,43 @@
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
 
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      }
+    
+      var userId = getUrlParameter('uid');
       var msgTxt = document.getElementById("msgTxt");
-      var sender;
+      let sender = sessionStorage.getItem("sender");
 
-      if (sessionStorage.getItem("sender")) {
-        sender = sessionStorage.getItem("sender");
-      } else {
-        sender = prompt("Enter your name");
+      if (!sender) {
+        sender = "Admin";
         sessionStorage.setItem("sender", sender);
       }
+      
+      
       module.sendMessage = function sendMessage() {
         var msg = msgTxt.value;
         var timestamp = new Date().getTime();
-        set(ref(db, "messages/" + timestamp), {
+        set(ref(db, `messages/${userId}/${timestamp}`), { // Update the path to include userId
           msg: msg,
           sender: sender,
         });
       };
-
-      // To recieve
-
-      onChildAdded(ref(db, "messages"), (data) => {
+      
+      // To receive
+      onChildAdded(ref(db, `messages/${userId}`), (data) => { // Update the path to include userId
         if (data.val().sender == sender) {
           messages.innerHTML +=
-            "<div id=myMsgJustify class=outer id=" +
-            data.key +
-            "><div id=inner class=me>you : " +
-            data.val().msg +
-            "</div></div>";
+            `<div id=myMsgJustify class=outer id=${data.key}><div id=inner class=me>you : ${data.val().msg}</div></div>`;
         } else {
           messages.innerHTML +=
-            "<div class=outer id=" +
-            data.key +
-            "><div id=inner class=notme>: " +
-            data.val().sender +
-            " : " +
-            data.val().msg +
-            "</div></div>";
+            `<div class=outer id=${data.key}><div id=inner class=notme>${data.val().sender}: ${data.val().msg}</div></div>`;
         }
       });
-
+      
 
 
       // When message is deleted
@@ -245,6 +225,9 @@
         var msgBox = document.getElementById(data.key);
         messages.removeChild(msgBox);
       });
+
+
+
     </script>
   </body>
 </html>

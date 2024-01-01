@@ -84,12 +84,7 @@
               <span class="link">Browse Service</span>
             </a>
           </li>
-          <li class="list">
-            <a href="admin-connect-admin.html" class="nav-link">
-              <i class="bx bx-message-edit icon"></i>
-              <span class="link">Connect Admin</span>
-            </a>
-          </li>
+
           <li class="list">
             <a href="admin-verify-attachments.html" class="nav-link">
               <i class="bx bxs-select-multiple icon"></i>
@@ -275,10 +270,7 @@
                   rows="3"
                 ></textarea>
               </div>
-              <div class="mb-3">
-                <label for="formFileSm" class="form-label">Upload Pictures</label>
-                <input class="form-control" type="file" id="renderservicefile" />
-              </div>
+
 
             </form>
           </div>
@@ -512,7 +504,11 @@
 
       return formattedText;
 }
-
+// Function to convert URLs in text to clickable links
+function linkify(text) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.replace(urlRegex, (url) => `<a href="${url}" target="_blank">${url}</a>`);
+}
     </script>
   </body>
 </html>

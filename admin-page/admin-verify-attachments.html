@@ -86,7 +86,7 @@
           <li class="list">
             <a href="admin-notifications.html" class="nav-link">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Notifications</span>
+              <span class="link">Announcements</span>
             </a>
           </li>
           <li class="list">
@@ -95,12 +95,7 @@
               <span class="link">Browse Service</span>
             </a>
           </li>
-          <li class="list">
-            <a href="user-connect-admin.html" class="nav-link">
-              <i class="bx bx-message-edit icon"></i>
-              <span class="link">Connect Admin</span>
-            </a>
-          </li>
+
           <li class="list">
             <a href="user-upload-attachments.html" class="nav-link">
               <i class="bx bxs-select-multiple icon"></i>
@@ -215,62 +210,62 @@
     </style>
     
 
-<!-- Your modal HTML -->
-<div class="modal fade" id="viewContentModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Verify Attachments
-        </h1>
-      </div>
-      <!-- Content -->
-      <div class="modal-body">
-        <!-- Grades Section -->
-        <div class="grades-section">
-          <h2 class="user-page-title">Grades</h2>
-          <hr> <!-- Horizontal line -->
-          <div class="grades-image">
-            <!-- Add image for Grades -->
-            <img id="gradesImage" src="" alt="Grades Image" />
-            <p>GWA: <span id="gwaValue" style="font-size: 1.5em; color: blue;"></span></p>
+    <!-- Your modal HTML -->
+    <div class="modal fade" id="viewContentModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Verify Attachments
+            </h1>
+          </div>
+          <!-- Content -->
+          <div class="modal-body">
+            <!-- Grades Section -->
+            <div class="grades-section">
+              <h2 class="user-page-title">Grades</h2>
+              <hr> <!-- Horizontal line -->
+              <div class="grades-image">
+                <!-- Add image for Grades -->
+                <img id="gradesImage" src="" alt="Grades Image" />
+                <p>GWA: <span id="gwaValue" style="font-size: 1.5em; color: blue;"></span></p>
+              </div>
+            </div>
+            <!-- Rendered Service Section -->
+            <div class="rendered-service-section">
+              <h2 class="user-page-title">Rendered Service</h2>
+              <hr> <!-- Horizontal line -->
+              <div class="rendered-service-image">
+                <!-- Add image for Rendered Service -->
+                <img id="renderedServiceImage" src="" alt="Rendered Service Image" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+            type="button"
+            class="btn btn-primary admin-createbrowse-button"
+          >
+            Verified
+          </button>
+          <button
+          type="button"
+          class="btn btn-danger admin-createbrowse-button"
+          >
+          Failed
+            </button>
+        
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
           </div>
         </div>
-        <!-- Rendered Service Section -->
-        <div class="rendered-service-section">
-          <h2 class="user-page-title">Rendered Service</h2>
-          <hr> <!-- Horizontal line -->
-          <div class="rendered-service-image">
-            <!-- Add image for Rendered Service -->
-            <img id="renderedServiceImage" src="" alt="Rendered Service Image" />
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-        type="button"
-        class="btn btn-primary admin-createbrowse-button"
-       >
-        Verified
-       </button>
-       <button
-       type="button"
-       class="btn btn-danger admin-createbrowse-button"
-       >
-       Failed
-        </button>
-    
-        </button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
       </div>
     </div>
-  </div>
-</div>
 
-  
-  
+      
+      
   
 
     <script
@@ -332,11 +327,11 @@
                         </select>
                       </td>
                       <td>
+                        
                         <button
                           type="button"
-                          class="btn btn-primary admin-verify-button"
+                          class="btn btn-primary admin-message-button" 
                           data-bs-toggle="modal"
-                          data-bs-target="#viewContentModel"
                         >
                           Message
                         </button>
@@ -353,7 +348,20 @@
                       </td>
                     `;
                     tableBody.appendChild(row);
+                    
                       
+                    const messageButtons = document.querySelectorAll('.admin-message-button');
+                    messageButtons.forEach((button) => {
+                      button.addEventListener('click', async (event) => {
+                        const row = event.target.closest('tr');
+                        const userId = row.querySelector('.status-dropdown').dataset.uid; // Get the userID from the row
+                        console.log(userId);
+                        // Navigate to admin-verify-attachments.html passing the userId as a query parameter
+                        // Navigate to admin-connect-admin.html passing the userId as a query parameter
+                      window.location.href = `admin-connect-admin.html?uid=${userId}`;
+                      });
+                    });
+                    
                     // Add event listener to the status dropdown
                     const statusDropdown = row.querySelector('.status-dropdown');
                     updateDropdownColor(statusDropdown); // Initial call to set the dropdown color
@@ -448,9 +456,12 @@
                   console.log("No data available");
                 }
                })
+               
                .catch((error) => {
                 console.error("Error fetching documents: ", error);
               });
+
+              
 
               // Function to update the dropdown color based on the selected option
              function updateDropdownColor(dropdown) {

@@ -75,7 +75,7 @@
           <li class="list">
             <a class="nav-link" id="notificationLink">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Notifications</span>
+              <span class="link">Announcements</span>
             </a>
           </li>
           <li class="list">
@@ -131,7 +131,7 @@
         <div class="col">
           <div class="card">
             <img
-              src="image-source/user-connect-cover.jpg"
+              src="../image-source/user-connect-cover.jpg"
               class="card-img-top"
               alt="..."
             />
@@ -142,33 +142,27 @@
         </div>
       </div>
 
-      <div
-        class="card border-dark mb-3 userMessageContent"
-        style="min-width: 18rem; margin-top: 20px; color: #0e2b63"
-      >
+      <div class="card border-dark mb-3 userMessageContent" style="min-width: 18rem; margin-top: 20px; color: #0e2b63">
         <div class="card-header">Send Message Here</div>
-
         <div id="messages"></div>
         <div id="sendMessage" class="message-content">
-          <input
-            type="text"
-            id="msgTxt"
-            class="msgContentPlace"
-            placeholder="Send your message"
-          />
-          <input
-            type="submit"
-            id="msgBtn"
-            class="msgButtonStyle"
-            value="send"
-            onclick="module.sendMessage()"
-          />
+          <input type="text" id="msgTxt" class="msgContentPlace" placeholder="Send your message" onkeypress="handleKeyPress(event)" />
+          <input type="submit" id="msgBtn" class="msgButtonStyle" value="send" onclick="module.sendMessage()" />
         </div>
+      </div>
       </div>
     </main>
 
     <script>
       module = {};
+
+      function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault(); // Prevent the default form submission
+          module.sendMessage(); // Call sendMessage function
+          document.getElementById('msgTxt').value = ''; // Clear the input field after sending the message
+        }
+      }
     </script>
 
     <script
@@ -183,6 +177,7 @@
       import {
         getDatabase,
         ref,
+        get,
         set,
         remove,
         onChildAdded,
@@ -213,59 +208,65 @@
       }
     
       var userId = getUrlParameter('uid');
-
       var msgTxt = document.getElementById("msgTxt");
-      var sender;
+      let sender;
 
-      if (sessionStorage.getItem("sender")) {
-      sender = sessionStorage.getItem("sender");
-    } else {
-      // Fetching user's name from Firebase based on userID
-      fetchUserName(userId).then((userName) => {
-        if (userName) {
-          sender = userName;
-          sessionStorage.setItem("sender", sender);
+      const firstNameRef = ref(db, `users/${userId}/firstname`);
+      
+      // Retrieve data
+      get(firstNameRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          const firstName = snapshot.val();
+          console.log('First Name:', firstName);
+      
+          // Use the retrieved first name as the sender
+          sender = firstName;
+      
+          // Now you can use the sender variable as needed.
         } else {
-          // If the name doesn't exist in Firebase, prompt for it (fallback)
+          console.log('No data available');
+          // If no first name is available, prompt for sender's name
           sender = prompt("Enter your name");
           sessionStorage.setItem("sender", sender);
         }
       }).catch((error) => {
-        console.error("Error fetching user's name:", error);
-        sender = prompt("Enter your name"); // Fallback if there's an error fetching the name
+        console.error('Error getting data:', error);
+        // If there's an error, prompt for sender's name
+        sender = prompt("Enter your name");
         sessionStorage.setItem("sender", sender);
       });
-    }
+      
+
+            // Function to handle Enter key press
+      function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault(); // Prevent the default form submission
+          module.sendMessage(); // Call sendMessage function
+          document.getElementById('msgTxt').value = ''; // Clear the input field after sending the message
+        }
+      }
+
+
       module.sendMessage = function sendMessage() {
         var msg = msgTxt.value;
         var timestamp = new Date().getTime();
-        set(ref(db, "messages/" + timestamp), {
+        set(ref(db, `messages/${userId}/${timestamp}`), { // Update the path to include userId
           msg: msg,
           sender: sender,
         });
       };
-
-      // To recieve
-
-      onChildAdded(ref(db, "messages"), (data) => {
+      
+      // To receive
+      onChildAdded(ref(db, `messages/${userId}`), (data) => { // Update the path to include userId
         if (data.val().sender == sender) {
           messages.innerHTML +=
-            "<div id=myMsgJustify class=outer id=" +
-            data.key +
-            "><div id=inner class=me>you : " +
-            data.val().msg +
-            "</div></div>";
+            `<div id=myMsgJustify class=outer id=${data.key}><div id=inner class=me>you : ${data.val().msg}</div></div>`;
         } else {
           messages.innerHTML +=
-            "<div class=outer id=" +
-            data.key +
-            "><div id=inner class=notme>: " +
-            data.val().sender +
-            " : " +
-            data.val().msg +
-            "</div></div>";
+            `<div class=outer id=${data.key}><div id=inner class=notme>${data.val().sender}: ${data.val().msg}</div></div>`;
         }
       });
+
 
       // TO delete message
 
