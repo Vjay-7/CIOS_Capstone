@@ -42,9 +42,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="user-scholar-status.html"
-                >Scholar Status</a
-              >
+              <a class="dropdown-item" id="ScholarStatuslink3">Scholar Status</a>
             </li>
             <li>
               <a class="dropdown-item" href="../home-page-user.html">Logout</a>
@@ -429,6 +427,7 @@
       var notificationLink = document.getElementById('notificationLink');
       var dashboardlink = document.getElementById('dashboardlink');
       var ScholarStatuslink = document.getElementById('ScholarStatuslink');
+      var ScholarStatuslink3 = document.getElementById('ScholarStatuslink3');
       var BrowseServicelink = document.getElementById('BrowseServicelink');
       var ConnectAdminlink = document.getElementById('ConnectAdminlink');
       var UploadAttachmentslink = document.getElementById('UploadAttachmentslink');
@@ -436,8 +435,9 @@
       var ViewRenderedServiceslink = document.getElementById('ViewRenderedServiceslink');
     
 
-      if (userId && ScholarStatuslink) {
+      if (userId && ScholarStatuslink  && ScholarStatuslink3 ) {
         ScholarStatuslink.href = 'user-scholar-status.html?uid=' + userId;
+        ScholarStatuslink3.href = 'user-scholar-status.html?uid=' + userId;
       }
       if (userId && notificationLink) {
         notificationLink.href = 'user-notification.html?uid=' + userId;
