@@ -182,7 +182,52 @@
           });
         });
       });
+      
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
 
+      var userId = getUrlParameter('uid');
+      const userRef = dbRef(database, `users/${userId}`);
+      var notificationLink = document.getElementById('notificationLink');
+      var dashboardlink = document.getElementById('dashboardlink');
+      var ScholarStatuslink = document.getElementById('ScholarStatuslink');
+      var BrowseServicelink = document.getElementById('BrowseServicelink');
+      var ConnectAdminlink = document.getElementById('ConnectAdminlink');
+      var UploadAttachmentslink = document.getElementById('UploadAttachmentslink');
+      var DownlaodCSRlink = document.getElementById('DownlaodCSRlink');
+      var ViewRenderedServiceslink = document.getElementById('ViewRenderedServiceslink');
+    
+
+      if (userId && ScholarStatuslink) {
+        ScholarStatuslink.href = 'user-scholar-status.html?uid=' + userId;
+      }
+      if (userId && notificationLink) {
+        notificationLink.href = 'user-notification.html?uid=' + userId;
+      }
+      if (userId && dashboardlink) {
+        dashboardlink.href = 'user-dashboard-main.html?uid=' + userId;
+      }
+      if (userId && BrowseServicelink) {
+        BrowseServicelink.href = 'user-browse-service.html?uid=' + userId;
+      }
+      if (userId && ConnectAdminlink) {
+        ConnectAdminlink.href = 'user-connect-admin.html?uid=' + userId;
+      }
+      if (userId && UploadAttachmentslink) {
+        UploadAttachmentslink.href = 'user-upload-attachments.html?uid=' + userId;
+      }
+      if (userId && DownlaodCSRlink) {
+        DownlaodCSRlink.href = 'user-download.html?uid=' + userId;
+      }
+      if (userId && ViewRenderedServiceslink) {
+        ViewRenderedServiceslink.href = 'user-view-rendered-services.html?uid=' + userId;
+      }
       
     </script>
 

@@ -579,11 +579,20 @@
 
 
 
-      console.log("User ID:", userId);
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+      var userId = getUrlParameter('uid');
+     
       var notificationLink = document.getElementById("notificationLink");
       var dashboardlink = document.getElementById("dashboardlink");
-      var ScholarStatuslink = document.getElementById("ScholarStatuslink");
       var BrowseServicelink = document.getElementById("BrowseServicelink");
+      var ScholarStatuslink = document.getElementById("ScholarStatuslink");
       var ConnectAdminlink = document.getElementById("ConnectAdminlink");
       var UploadAttachmentslink = document.getElementById(
         "UploadAttachmentslink"

@@ -141,11 +141,12 @@
 
                   <a
                     class="btn btn-sm btn-outline-primary user-welcome"
-                    id="scholarstatuslink"
+                    href="#"
+                    id="ScholarStatuslink2"
                     >View Status</a
                   >
                   <a
-                    id="ViewRenderedServiceslink"
+                    href="user-browse-service.html"
                     class="btn btn-sm btn-outline-primary user-welcome"
                     >View Rendered Services</a
                   >
@@ -206,7 +207,7 @@
                 Check your status and download your Certificate of Enrollment.
               </p>
               <a
-                id="DownlaodCSRlink"
+                id="DownlaodCSRlink1"
                 class="btn btn-primary user-first-row-button"
                 style="margin: 4px"
                 >View to Download <i class="bx bxs-download user-main-icon"></i>
@@ -228,7 +229,7 @@
             >
               <a
                 class="small text-white stretched-link"
-                id="notificationLink"   
+                href="user-notification.html"
                 >View Details</a
               >
               <div class="small text-white">
@@ -248,7 +249,7 @@
             >
               <a
                 class="small text-white stretched-link"
-                href="user-browse-service.html?${userId}"
+                href="user-browse-service.html"
                 >View Details</a
               >
               <div class="small text-white">
@@ -257,18 +258,13 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6" id="ScholarStatuslink">
+        <div class="col-xl-3 col-md-6">
           <div class="card mb-4" style="background-color: #ffb703">
             <div class="card-body" style="color: #fff">
               Scholar Status <i class="bx bxs-user-account icon-in"></i>
             </div>
-            <div
-              class="card-footer d-flex align-items-center justify-content-between"
-            >
-              <a
-                class="small text-white stretched-link"
-                >View Details</a
-              >
+            <div class="card-footer d-flex align-items-center justify-content-between">
+              <a href="#" class="small text-white stretched-link" id="ScholarStatuslink1">View Details</a>
               <div class="small text-white">
                 <i class="bx bx-chevron-right"></i>
               </div>
@@ -285,7 +281,8 @@
             >
               <a
                 class="small text-white stretched-link"
-                href="user-connect-admin.html?${userId}"
+                href="#"
+                id="ConnectAdminlink1"
                 >View Details</a
               >
               <div class="small text-white">
@@ -338,17 +335,23 @@
       var notificationLink = document.getElementById('notificationLink');
       var dashboardlink = document.getElementById('dashboardlink');
       var ScholarStatuslink = document.getElementById('ScholarStatuslink');
+      var ScholarStatuslink1 = document.getElementById('ScholarStatuslink1');
+      var ScholarStatuslink2 = document.getElementById('ScholarStatuslink2');
       var BrowseServicelink = document.getElementById('BrowseServicelink');
       var ConnectAdminlink = document.getElementById('ConnectAdminlink');
+      var ConnectAdminlink1 = document.getElementById('ConnectAdminlink1');
       var UploadAttachmentslink = document.getElementById('UploadAttachmentslink');
       var UploadAttachmentslink1 = document.getElementById('UploadAttachmentslink1');
       var DownlaodCSRlink = document.getElementById('DownlaodCSRlink');
+      var DownlaodCSRlink1 = document.getElementById('DownlaodCSRlink1');
       var ViewRenderedServiceslink = document.getElementById('ViewRenderedServiceslink');
     
 
-      if (userId && ScholarStatuslink) {
-        ScholarStatuslink.href = 'user-scholar-status.html?uid=' + userId;
-      }
+    
+        ScholarStatuslink.href = "user-scholar-status.html?uid=" + userId;
+        ScholarStatuslink1.href = "user-scholar-status.html?uid=" + userId;
+        ScholarStatuslink2.href = "user-scholar-status.html?uid=" + userId;
+      
       if (userId && notificationLink) {
         notificationLink.href = 'user-notification.html?uid=' + userId;
       }
@@ -358,15 +361,17 @@
       if (userId && BrowseServicelink) {
         BrowseServicelink.href = 'user-browse-service.html?uid=' + userId;
       }
-      if (userId && ConnectAdminlink) {
+      if (userId && ConnectAdminlink && ConnectAdminlink1) {
         ConnectAdminlink.href = 'user-connect-admin.html?uid=' + userId;
+        ConnectAdminlink1.href = 'user-connect-admin.html?uid=' + userId;
       }
       if (userId && UploadAttachmentslink && UploadAttachmentslink1) {
         UploadAttachmentslink.href = 'user-upload-attachments.html?uid=' + userId;
         UploadAttachmentslink1.href = 'user-upload-attachments.html?uid=' + userId;
       }
-      if (userId && DownlaodCSRlink) {
+      if (userId  && DownlaodCSRlink && DownlaodCSRlink1) {
         DownlaodCSRlink.href = 'user-download.html?uid=' + userId;
+        DownlaodCSRlink1.href = 'user-download.html?uid=' + userId;
       }
       if (userId && ViewRenderedServiceslink) {
         ViewRenderedServiceslink.href = 'user-view-rendered-services.html?uid=' + userId;
