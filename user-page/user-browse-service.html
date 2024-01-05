@@ -42,10 +42,12 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" id="ScholarStatuslink3">Scholar Status</a>
+              <a class="dropdown-item" id="ScholarStatuslink3"
+                >Scholar Status</a
+              >
             </li>
             <li>
-              <a class="dropdown-item" href="../home-page-user.html">Logout</a>
+              <a class="dropdown-item" href="../index.html">Logout</a>
             </li>
           </ul>
         </div>
@@ -66,14 +68,14 @@
           </li>
           <li class="list">
             <a class="nav-link" id="ScholarStatuslink">
-              <i class="bx bxs-dashboard icon"></i>
+              <i class="bx bxs-user-account icon"></i>
               <span class="link">Scholar Status</span>
             </a>
           </li>
           <li class="list">
             <a class="nav-link" id="notificationLink">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Announcements</span>
+              <span class="link">Notifications</span>
             </a>
           </li>
           <li class="list">
@@ -95,15 +97,15 @@
             </a>
           </li>
           <li class="list">
-            <a  class="nav-link" id="DownlaodCSRlink">
+            <a class="nav-link" id="DownlaodCSRlink">
               <i class="bx bxs-download icon"></i>
-              <span class="link">Downlaod CSR</span>
+              <span class="link">Download CSR</span>
             </a>
           </li>
         </ul>
         <div class="bottom-content">
           <li class="list-bottom">
-            <a href="../home-page-user.html?${userId}" class="nav-link">
+            <a href="../index.html?${userId}" class="nav-link">
               <i class="bx bx-log-out icon"></i>
               <span class="link">Logout</span>
             </a>
@@ -116,11 +118,9 @@
       <p class="user-page-title">Browse Service</p>
       <nav aria-label="breadcrumb" style="margin-left: 10px">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="admin-dashboard-main.html">Dashboard</a>
-          </li>
+          <li class="breadcrumb-item">Dashboard</li>
           <li class="breadcrumb-item active" aria-current="page">
-            Browse Service
+            Browse Services
           </li>
         </ol>
       </nav>
@@ -134,8 +134,10 @@
         >
       </nav>
 
-      <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-left: 1px">
-      </div>
+      <div
+        class="row row-cols-1 row-cols-md-3 g-4"
+        style="margin-left: 1px"
+      ></div>
 
       <!-- Button trigger modal -->
 
@@ -151,121 +153,118 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">
-            Rendered Service Opportunity
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-
-        <div class="content-imagesize">
-          <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button>
-            </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  src="../image-source/adminnotif1.jpg"
-                  class="d-block w-100"
-                  alt="..."
-                  id="rendered-image-reference-1"
-                />
-              </div>     
-            </div>
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Rendered Service Opportunity</h1>
             <button
-              class="carousel-control-prev"
               type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="content-imagesize">
+            <div id="carouselExampleIndicators" class="carousel slide">
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="../image-source/adminnotif1.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                    id="rendered-image-reference-1"
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card admin-rendered-content">
+            <div
+              id="rendered-service-title"
+              class="card-header admin-notif-contenttitle"
             >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
+              Rendered Service Opportunity
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p id="rendered-service-content-text">...</p>
+              </blockquote>
+            </div>
+          </div>
+
+          <div class="card border-success" style="margin: 15px">
+            <div class="card-header">Render Service</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Where:
+                <p id="renderedService-where">...</p>
+              </li>
+              <li class="list-group-item">
+                When:
+                <p id="renderedService-when"></p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="modal-footer">
             <button
-              class="carousel-control-next"
               type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
             >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
+              Understood
             </button>
           </div>
-        </div>
-
-        <div class="card admin-rendered-content">
-          <div id="rendered-service-title" class="card-header admin-notif-contenttitle">
-            Rendered Service Opportunity
-          </div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <p id="rendered-service-content-text">
-                ...
-              </p>
-            </blockquote>
-          </div>
-        </div>
-
-        <div class="card border-success" style="margin: 15px">
-          <div class="card-header">Render Service</div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              Where:
-              <p id="renderedService-where">...</p>
-            </li>
-            <li class="list-group-item">
-              When:
-              <p id="renderedService-when"></p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-          >
-          Understood
-          </button>
         </div>
       </div>
-    </div>
-    </div>
-    
     </div>
 
     <script
@@ -276,20 +275,36 @@
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-      import {getDatabase, set, ref, child, onValue, get} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-      import { getStorage, ref as dbRef, uploadBytes, list, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+      import {
+        getDatabase,
+        set,
+        ref,
+        child,
+        onValue,
+        get,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+      import {
+        getStorage,
+        ref as dbRef,
+        uploadBytes,
+        list,
+        getDownloadURL,
+        listAll,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
 
       function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
         var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
-    
-      var userId = getUrlParameter('uid');
-    
-    // Initialize Firebase
-    const firebaseConfig = {
+
+      var userId = getUrlParameter("uid");
+
+      // Initialize Firebase
+      const firebaseConfig = {
         apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
         authDomain: "coisprojectmain.firebaseapp.com",
         projectId: "coisprojectmain",
@@ -301,43 +316,44 @@
       const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
       const storage = getStorage(app);
-     
-//////////// POST STATIC DISPLAY FROM FIREBASE
+
+      //////////// POST STATIC DISPLAY FROM FIREBASE
       document.addEventListener("DOMContentLoaded", function () {
-      const database = getDatabase(app);
-      const postsRef = ref(database, 'posts'); // Reference to the 'posts' node in Firebase
-      
-      
-      // Fetch data from Firebase
-      onValue(postsRef, (snapshot) => {
-        const posts = snapshot.val(); // Retrieved posts from Firebase
+        const database = getDatabase(app);
+        const postsRef = ref(database, "posts"); // Reference to the 'posts' node in Firebase
 
-        // Get the container where you want to display the posts
-        const cardContainer = document.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
+        // Fetch data from Firebase
+        onValue(postsRef, (snapshot) => {
+          const posts = snapshot.val(); // Retrieved posts from Firebase
 
-      // Function to format text content with line breaks and clickable links
-        function formatText(text) {
-          const formattedText = text
-            .split('\n')
-            .map((line) => {
-              if (line.match(/https?:\/\/[^\s]+/)) {
-                return `<p>${linkify(line)}</p>`;
-              }
-              return `<p>${line}</p>`;
-            })
-            .join('');
+          // Get the container where you want to display the posts
+          const cardContainer = document.querySelector(
+            ".row.row-cols-1.row-cols-md-3.g-4"
+          );
 
-          return formattedText;
-        }
-      
-   // Loop through the posts
-    for (const key in posts) {
-          const postData = posts[key]; // Retrieve individual post data
+          // Function to format text content with line breaks and clickable links
+          function formatText(text) {
+            const formattedText = text
+              .split("\n")
+              .map((line) => {
+                if (line.match(/https?:\/\/[^\s]+/)) {
+                  return `<p>${linkify(line)}</p>`;
+                }
+                return `<p>${line}</p>`;
+              })
+              .join("");
 
-          // Create HTML elements dynamically and populate them with fetched data
-          const newCard = document.createElement('div');
-          newCard.className = 'col';
-          newCard.innerHTML = `
+            return formattedText;
+          }
+
+          // Loop through the posts
+          for (const key in posts) {
+            const postData = posts[key]; // Retrieve individual post data
+
+            // Create HTML elements dynamically and populate them with fetched data
+            const newCard = document.createElement("div");
+            newCard.className = "col";
+            newCard.innerHTML = `
             <div class="card admin-browse-content1">
               <img src="../image-source/rendered-service-poster1.png" class="card-img-top rendered-service-poster1" alt="...">
               <div class="card-body">
@@ -350,115 +366,102 @@
             </div>
           `;
 
-          // Append the newly created card to the card container
-          cardContainer.appendChild(newCard);
-          // Call the function to update the profile picture
-          
+            // Append the newly created card to the card container
+            cardContainer.appendChild(newCard);
+            // Call the function to update the profile picture
 
             // Add event listener to the 'View More Details' button
-          newCard.querySelector('.admin-notif-btn-render').addEventListener('click', function() {
-            // Update modal content with Firebase data
-            document.getElementById('rendered-service-title').innerText = postData.title;
-            document.getElementById('rendered-service-content-text').innerHTML = postData.content; // You can set the content here
-            document.getElementById('renderedService-where').innerText = postData.where;
-            document.getElementById('renderedService-when').innerText = postData.when;
-          postPicture(key);
-          });
-        }
-
-
-        function postPicture(number) {
-        console.log(number);
-        const storageRef = dbRef(storage, `posts/${number}`);
-
-        listAll(storageRef)
-          .then((res) => {
-            if (res.items.length > 0) {
-              // Sort items by their metadata (creation time)
-              const sortedItems = res.items.sort((a, b) => b.timeCreated - a.timeCreated);
-
-              // Get the most recent item (first item after sorting)
-              const mostRecentItem = sortedItems[0];
-
-              // Fetch download URL for the most recent item
-              getDownloadURL(mostRecentItem).then((url) => {
-                const profilePic = document.getElementById('rendered-image-reference-1');
-                profilePic.src = url;
+            newCard
+              .querySelector(".admin-notif-btn-render")
+              .addEventListener("click", function () {
+                // Update modal content with Firebase data
+                document.getElementById("rendered-service-title").innerText =
+                  postData.title;
+                document.getElementById(
+                  "rendered-service-content-text"
+                ).innerHTML = postData.content; // You can set the content here
+                document.getElementById("renderedService-where").innerText =
+                  postData.where;
+                document.getElementById("renderedService-when").innerText =
+                  postData.when;
+                postPicture(key);
               });
-            } else {
-              console.error('No images found in the folder');
-            }
-          })
-          .catch((error) => {
-            console.error('Error listing files:', error);
-          });
-      }
+          }
+
+          function postPicture(number) {
+            console.log(number);
+            const storageRef = dbRef(storage, `posts/${number}`);
+
+            listAll(storageRef)
+              .then((res) => {
+                if (res.items.length > 0) {
+                  // Sort items by their metadata (creation time)
+                  const sortedItems = res.items.sort(
+                    (a, b) => b.timeCreated - a.timeCreated
+                  );
+
+                  // Get the most recent item (first item after sorting)
+                  const mostRecentItem = sortedItems[0];
+
+                  // Fetch download URL for the most recent item
+                  getDownloadURL(mostRecentItem).then((url) => {
+                    const profilePic = document.getElementById(
+                      "rendered-image-reference-1"
+                    );
+                    profilePic.src = url;
+                  });
+                } else {
+                  console.error("No images found in the folder");
+                }
+              })
+              .catch((error) => {
+                console.error("Error listing files:", error);
+              });
+          }
+        });
       });
-    });
 
+      console.log("User ID:", userId);
+      var notificationLink = document.getElementById("notificationLink");
+      var dashboardlink = document.getElementById("dashboardlink");
+      var ScholarStatuslink = document.getElementById("ScholarStatuslink");
+      var ScholarStatuslink3 = document.getElementById("ScholarStatuslink3");
+      var BrowseServicelink = document.getElementById("BrowseServicelink");
+      var ConnectAdminlink = document.getElementById("ConnectAdminlink");
+      var UploadAttachmentslink = document.getElementById(
+        "UploadAttachmentslink"
+      );
+      var DownlaodCSRlink = document.getElementById("DownlaodCSRlink");
+      var ViewRenderedServiceslink = document.getElementById(
+        "ViewRenderedServiceslink"
+      );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      console.log('User ID:', userId); 
-      var notificationLink = document.getElementById('notificationLink');
-      var dashboardlink = document.getElementById('dashboardlink');
-      var ScholarStatuslink = document.getElementById('ScholarStatuslink');
-      var ScholarStatuslink3 = document.getElementById('ScholarStatuslink3');
-      var BrowseServicelink = document.getElementById('BrowseServicelink');
-      var ConnectAdminlink = document.getElementById('ConnectAdminlink');
-      var UploadAttachmentslink = document.getElementById('UploadAttachmentslink');
-      var DownlaodCSRlink = document.getElementById('DownlaodCSRlink');
-      var ViewRenderedServiceslink = document.getElementById('ViewRenderedServiceslink');
-    
-
-      if (userId && ScholarStatuslink  && ScholarStatuslink3 ) {
-        ScholarStatuslink.href = 'user-scholar-status.html?uid=' + userId;
-        ScholarStatuslink3.href = 'user-scholar-status.html?uid=' + userId;
+      if (userId && ScholarStatuslink && ScholarStatuslink3) {
+        ScholarStatuslink.href = "user-scholar-status.html?uid=" + userId;
+        ScholarStatuslink3.href = "user-scholar-status.html?uid=" + userId;
       }
       if (userId && notificationLink) {
-        notificationLink.href = 'user-notification.html?uid=' + userId;
+        notificationLink.href = "user-notification.html?uid=" + userId;
       }
       if (userId && dashboardlink) {
-        dashboardlink.href = 'user-dashboard-main.html?uid=' + userId;
+        dashboardlink.href = "user-dashboard-main.html?uid=" + userId;
       }
       if (userId && BrowseServicelink) {
-        BrowseServicelink.href = 'user-browse-service.html?uid=' + userId;
+        BrowseServicelink.href = "user-browse-service.html?uid=" + userId;
       }
       if (userId && ConnectAdminlink) {
-        ConnectAdminlink.href = 'user-connect-admin.html?uid=' + userId;
+        ConnectAdminlink.href = "user-connect-admin.html?uid=" + userId;
       }
       if (userId && UploadAttachmentslink) {
-        UploadAttachmentslink.href = 'user-upload-attachments.html?uid=' + userId;
+        UploadAttachmentslink.href =
+          "user-upload-attachments.html?uid=" + userId;
       }
       if (userId && DownlaodCSRlink) {
-        DownlaodCSRlink.href = 'user-download.html?uid=' + userId;
+        DownlaodCSRlink.href = "user-download.html?uid=" + userId;
       }
       if (userId && ViewRenderedServiceslink) {
-        ViewRenderedServiceslink.href = 'user-view-rendered-services.html?uid=' + userId;
+        ViewRenderedServiceslink.href =
+          "user-view-rendered-services.html?uid=" + userId;
       }
     </script>
   </body>

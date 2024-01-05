@@ -58,7 +58,7 @@
               >
             </li>
             <li>
-              <a class="dropdown-item" href="../home-page-user.html">Logout</a>
+              <a class="dropdown-item" href="../index.html">Logout</a>
             </li>
           </ul>
         </div>
@@ -86,7 +86,7 @@
           <li class="list">
             <a href="admin-notifications.html" class="nav-link">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Announcements</span>
+              <span class="link">Notifications</span>
             </a>
           </li>
           <li class="list">
@@ -105,7 +105,7 @@
         </ul>
         <div class="bottom-content">
           <li class="list-bottom">
-            <a href="../home-page-user.html" class="nav-link">
+            <a href="../index.html" class="nav-link">
               <i class="bx bx-log-out icon"></i>
               <span class="link">Logout</span>
             </a>
@@ -118,9 +118,7 @@
       <p class="user-page-title">Verify Attachments</p>
       <nav aria-label="breadcrumb" style="margin-left: 10px">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="admin-dashboard-main.html">Dashboard</a>
-          </li>
+          <li class="breadcrumb-item">Dashboard</li>
           <li class="breadcrumb-item active" aria-current="page">
             Verify Attachments
           </li>
@@ -228,7 +226,7 @@
               <div class="grades-image">
                 <!-- Add image for Grades -->
                 <img id="gradesImage" src="" alt="Grades Image" />
-                <p>GWA: <span id="gwaValue" style="font-size: 1.5em; color: blue;"></span></p>
+                
               </div>
             </div>
             <!-- Rendered Service Section -->
@@ -384,8 +382,7 @@
                         const row = event.target.closest('tr');
                         const userId = row.querySelector('.status-dropdown').dataset.uid; // Get the userID from the row
                          // Fetch GWA value from Firebase Realtime Database
-                        const gwaValueElement = document.getElementById('gwaValue');
-                        const gwaRef = dbRef(database, `Grades/${userId}/GWA`);
+                        
 
                         const modalContent = document.getElementById('viewContentModel');
                         const gradesImage = modalContent.querySelector('#gradesImage');
@@ -401,12 +398,9 @@
 
                           const gradesImageURL = await getDownloadURL(imageFiles.items[0]);
                           const renderedServiceImageURL = await getDownloadURL(gradesFiles.items[0]);
-                          const gwaSnapshot = await get(gwaRef);
-                          const gwaValue = gwaSnapshot.val();
-                          const formattedGWA = gwaValue ? parseFloat(gwaValue).toFixed(2) : '';
+                          
 
-                          gwaValueElement.textContent = gwaValue || '';
-                          gwaValueElement.textContent = formattedGWA;
+                          
                           gradesImage.src = gradesImageURL;
                           renderedServiceImage.src = renderedServiceImageURL;
 

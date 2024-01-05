@@ -45,7 +45,7 @@
               <a class="dropdown-item" href="#">Scholar Status</a>
             </li>
             <li>
-              <a class="dropdown-item" href="../home-page-user.html">Logout</a>
+              <a class="dropdown-item" href="../index.html">Logout</a>
             </li>
           </ul>
         </div>
@@ -73,7 +73,7 @@
           <li class="list">
             <a href="admin-notifications.html" class="nav-link">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Announcements</span>
+              <span class="link">Notifications</span>
             </a>
           </li>
           <li class="list">
@@ -82,9 +82,9 @@
               <span class="link">Browse Service</span>
             </a>
           </li>
-      
+
           <li class="list">
-            <a href="user-upload-attachments.html" class="nav-link">
+            <a href="admin-verify-attachments.html" class="nav-link">
               <i class="bx bxs-select-multiple icon"></i>
               <span class="link">Verify Attachments</span>
             </a>
@@ -92,7 +92,7 @@
         </ul>
         <div class="bottom-content">
           <li class="list-bottom">
-            <a href="../home-page-user.html" class="nav-link">
+            <a href="../index.html" class="nav-link">
               <i class="bx bx-log-out icon"></i>
               <span class="link">Logout</span>
             </a>
@@ -100,7 +100,6 @@
         </div>
       </div>
     </div>
-
 
     <main class="mt-5 pt-3">
       <p class="user-page-title">
@@ -123,12 +122,27 @@
         </div>
       </div>
 
-      <div class="card border-dark mb-3 userMessageContent" style="min-width: 18rem; margin-top: 20px; color: #0e2b63">
+      <div
+        class="card border-dark mb-3 userMessageContent"
+        style="min-width: 18rem; margin-top: 20px; color: #0e2b63"
+      >
         <div class="card-header">Send Message Here</div>
-        <div id="messages"></div>
+        <div id="messages" style="max-height: 300px; overflow-y: auto"></div>
         <div id="sendMessage" class="message-content">
-          <input type="text" id="msgTxt" class="msgContentPlace" placeholder="Send your message" onkeypress="handleKeyPress(event)" />
-          <input type="submit" id="msgBtn" class="msgButtonStyle" value="send" onclick="module.sendMessage()" />
+          <input
+            type="text"
+            id="msgTxt"
+            class="msgContentPlace"
+            placeholder="Send your message"
+            onkeypress="handleKeyPress(event)"
+          />
+          <input
+            type="submit"
+            id="msgBtn"
+            class="msgButtonStyle"
+            value="send"
+            onclick="module.sendMessage()"
+          />
         </div>
       </div>
     </main>
@@ -139,10 +153,10 @@
       module = {};
 
       function handleKeyPress(event) {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
           event.preventDefault(); // Prevent the default form submission
           module.sendMessage(); // Call sendMessage function
-          document.getElementById('msgTxt').value = ''; // Clear the input field after sending the message
+          document.getElementById("msgTxt").value = ""; // Clear the input field after sending the message
         }
       }
     </script>
@@ -182,13 +196,15 @@
       const db = getDatabase(app);
 
       function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
         var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
-    
-      var userId = getUrlParameter('uid');
+
+      var userId = getUrlParameter("uid");
       var msgTxt = document.getElementById("msgTxt");
       let sender = sessionStorage.getItem("sender");
 
@@ -196,38 +212,38 @@
         sender = "Admin";
         sessionStorage.setItem("sender", sender);
       }
-      
-      
+
       module.sendMessage = function sendMessage() {
         var msg = msgTxt.value;
         var timestamp = new Date().getTime();
-        set(ref(db, `messages/${userId}/${timestamp}`), { // Update the path to include userId
+        set(ref(db, `messages/${userId}/${timestamp}`), {
+          // Update the path to include userId
           msg: msg,
           sender: sender,
         });
       };
-      
+
       // To receive
-      onChildAdded(ref(db, `messages/${userId}`), (data) => { // Update the path to include userId
+      onChildAdded(ref(db, `messages/${userId}`), (data) => {
+        // Update the path to include userId
         if (data.val().sender == sender) {
-          messages.innerHTML +=
-            `<div id=myMsgJustify class=outer id=${data.key}><div id=inner class=me>you : ${data.val().msg}</div></div>`;
+          messages.innerHTML += `<div id=myMsgJustify class=outer id=${
+            data.key
+          }><div id=inner class=me>you : ${data.val().msg}</div></div>`;
         } else {
-          messages.innerHTML +=
-            `<div class=outer id=${data.key}><div id=inner class=notme>${data.val().sender}: ${data.val().msg}</div></div>`;
+          messages.innerHTML += `<div class=outer id=${
+            data.key
+          }><div id=inner class=notme>${data.val().sender}: ${
+            data.val().msg
+          }</div></div>`;
         }
       });
-      
-
 
       // When message is deleted
       onChildRemoved(ref(db, "messages"), (data) => {
         var msgBox = document.getElementById(data.key);
         messages.removeChild(msgBox);
       });
-
-
-
     </script>
   </body>
 </html>
