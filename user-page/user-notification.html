@@ -295,42 +295,33 @@
   
       });
   
-  
-  
+  ////////////Display
       document.addEventListener("DOMContentLoaded", function () {
         const database = getDatabase(app);
-        const postsRef = ref(database, 'postannouncements'); // Reference to the 'postannouncements' node in Firebase
-  
+        const postsRef = ref(database, 'postannouncements');
+      
         // Fetch data from Firebase
         onValue(postsRef, (snapshot) => {
-          const posts = snapshot.val(); // Retrieved posts from Firebase
-  
+          const posts = snapshot.val();
+      
           // Get the container where you want to display the posts
           const cardContainer = document.querySelector('.row-content');
-  
-          // Function to format text content with line breaks and clickable links
-          function formatText(text) {
-            const formattedText = text
-              .split('\n')
-              .map((line) => {
-                if (line.match(/https?:\/\/[^\s]+/)) {
-                  return `<p>${linkify(line)}</p>`;
-                }
-                return `<p>${line}</p>`;
-              })
-              .join('');
-  
-            return formattedText;
-          }
-  
-          // Loop through the posts
-          for (const key in posts) {
-            const postData = posts[key]; // Retrieve individual post data
-  
+      
+          // Get the keys and sort them in descending order
+          const keys = Object.keys(posts).sort((a, b) => {
+            const numA = parseInt(a.replace('ann', ''));
+            const numB = parseInt(b.replace('ann', ''));
+            return numB - numA;
+          });
+      
+          // Loop through the sorted keys and retrieve the corresponding data
+          keys.forEach((key) => {
+            const postData = posts[key];
+      
             // Create HTML elements dynamically and populate them with fetched data
             const newCard = document.createElement('div');
             newCard.className = 'col';
-  
+      
             // Adding "Feed Post" block within the card
             newCard.innerHTML = `
               <div class="card admin-notif-feed">
@@ -350,54 +341,26 @@
                 </div>
               </div>
             `;
-  
+      
             // Append the newly created card to the card container
             cardContainer.appendChild(newCard);
-  
+      
             // Add event listener to the 'View More Details' button
             newCard.querySelector('.admin-notif-btn-feed').addEventListener('click', function () {
               // Update modal content with Firebase data
               document.getElementById('post-title').innerText = postData.title;
               document.getElementById('post-content').innerHTML = postData.content; // You can set the content here
             });
-  
+      
             if (cardContainer) {
               cardContainer.appendChild(newCard);
             } else {
               console.error("cardContainer is null or undefined.");
             }
-          }
-  
-          function postPicture(number) {
-            console.log("post picture number", number);
-            const storageRef = dbRef(storage, `posts/${number}`);
-  
-            listAll(storageRef)
-              .then((res) => {
-                if (res.items.length > 0) {
-                  // Sort items by their metadata (creation time)
-                  const sortedItems = res.items.sort((a, b) => b.timeCreated - a.timeCreated);
-  
-                  // Get the most recent item (first item after sorting)
-                  const mostRecentItem = sortedItems[0];
-  
-                  // Fetch download URL for the most recent item
-                  getDownloadURL(mostRecentItem).then((url) => {
-                    const profilePic = document.getElementById('rendered-image-reference-1');
-                    profilePic.src = url;
-                  });
-                } else {
-                  console.error('No images found in the folder');
-                }
-              })
-              .catch((error) => {
-                console.error('Error listing files:', error);
-              });
-          }
+          });
         });
       });
-  
-  
+      
   //////////// Process Text
       function processTextForFirebase(text) {
         // Convert newlines to <br> tags
