@@ -58,7 +58,7 @@
               >
             </li>
             <li>
-              <a class="dropdown-item" href="../home-page-user.html">Logout</a>
+              <a class="dropdown-item" href="../index.html">Logout</a>
             </li>
           </ul>
         </div>
@@ -86,7 +86,7 @@
           <li class="list">
             <a href="admin-notifications.html" class="nav-link">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Announcements</span>
+              <span class="link">Notifications</span>
             </a>
           </li>
           <li class="list">
@@ -95,7 +95,7 @@
               <span class="link">Browse Service</span>
             </a>
           </li>
-   
+
           <li class="list">
             <a href="admin-verify-attachments.html" class="nav-link">
               <i class="bx bxs-select-multiple icon"></i>
@@ -105,7 +105,7 @@
         </ul>
         <div class="bottom-content">
           <li class="list-bottom">
-            <a href="../home-page-user.html" class="nav-link">
+            <a href="../index.html" class="nav-link">
               <i class="bx bx-log-out icon"></i>
               <span class="link">Logout</span>
             </a>
@@ -118,9 +118,7 @@
       <p class="user-page-title">Scholar Status</p>
       <nav aria-label="breadcrumb" style="margin-left: 10px">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="admin-dashboard-main.html">Dashboard</a>
-          </li>
+          <li class="breadcrumb-item">Dashboard</li>
           <li class="breadcrumb-item active" aria-current="page">
             Scholar Status
           </li>
@@ -160,16 +158,15 @@
         </div>
       </div>
 
-
       <div class="row" style="margin-left: 10px">
         <button
-        type="button"
-        class="btn btn-outline-primary admin-print-button1"
-        style="margin-right: 15px; margin-bottom: 5px"
-        id="generatePDF"
-      >
-        <i class="bx bx-printer"></i> Print all Scholar List
-      </button>
+          type="button"
+          class="btn btn-outline-primary admin-print-button1"
+          style="margin-right: 15px; margin-bottom: 5px"
+          id="generatePDF"
+        >
+          <i class="bx bx-printer"></i> Print all Scholar List
+        </button>
         <button
           type="button"
           class="btn btn-outline-primary admin-print-button2"
@@ -179,148 +176,152 @@
       </div>
     </main>
 
- <!-- Modal -->
+    <!-- Modal -->
     <div
-    class="modal fade"
-    id="adminAddScholarList"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
+      class="modal fade"
+      id="adminAddScholarList"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
     >
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">
-            <i class="bx bxs-user-detail"></i> Add Scholar
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <form id="scholarForm">
-        <div class="modal-body">
-          <form action="">
-            <label for="exampleInputEmail1" class="form-label"
-              >Email address</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              style="margin-bottom: 10px"
-            />
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              <i class="bx bxs-user-detail"></i> Add Scholar
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form id="scholarForm">
+            <div class="modal-body">
+              <form action="">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  style="margin-bottom: 10px"
+                />
 
-            <!-- Margin -->
-            <div class="input-group">
-              <span class="input-group-text">Full Name</span>
-              <input
-                type="text"
-                aria-label="First name"
-                id="firstname"
-                class="form-control"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                aria-label="Last name"
-                id="lastname"
-                class="form-control"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                aria-label="Last name"
-                class="form-control"
-                placeholder="Middle Name"
-                id="middlename"
-              />
+                <!-- Margin -->
+                <div class="input-group">
+                  <span class="input-group-text">Full Name</span>
+                  <input
+                    type="text"
+                    aria-label="First name"
+                    id="firstname"
+                    class="form-control"
+                    placeholder="First Name"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Last name"
+                    id="lastname"
+                    class="form-control"
+                    placeholder="Last Name"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Last name"
+                    class="form-control"
+                    placeholder="Middle Name"
+                    id="middlename"
+                  />
+                </div>
+
+                <!-- Program -->
+                <div class="input-group flex-nowrap" style="margin-top: 10px">
+                  <span class="input-group-text" id="addon-wrapping"
+                    >Program</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="BS in Computer Engineering"
+                    aria-label="Username"
+                    aria-describedby="addon-wrapping"
+                    id="program"
+                  />
+                </div>
+
+                <div class="input-group flex-nowrap" style="margin-top: 10px">
+                  <label for="school" class="input-group-text">School</label>
+                  <select class="form-select" id="school">
+                    <option value="USTP - CDO">USTP - CDO</option>
+                    <option value="USTP - Alubijid">USTP - Alubijid</option>
+                    <option value="USTP - Villanueva">USTP - Villanueva</option>
+                    <option value="USTP - Claveria">USTP - Claveria</option>
+                    <option value="USTP - Jasaan">USTP - Jasaan</option>
+                  </select>
+                </div>
+
+                <!-- School Year  -->
+                <div class="input-group flex-nowrap" style="margin-top: 10px">
+                  <label for="schoolYear" class="input-group-text"
+                    >School Year</label
+                  >
+                  <select class="form-select" id="schoolYear">
+                    <option value="2021-2022">2021-2022</option>
+                    <option value="2022-2023">2022-2023</option>
+                    <option value="2023-2024">2023-2024</option>
+                    <option value="2024-2025">2024-2025</option>
+                    <option value="2025-2026">2025-2026</option>
+                    <option value="2026-2027">2026-2027</option>
+                    <option value="2027-2028">2027-2028</option>
+                    <option value="2028-2029">2028-2029</option>
+                    <option value="2029-2030">2029-2030</option>
+                  </select>
+                </div>
+
+                <!-- School Year -->
+                <div class="input-group flex-nowrap" style="margin-top: 10px">
+                  <label for="yearLevel" class="input-group-text"
+                    >Year Level</label
+                  >
+                  <select class="form-select" id="yearLevel">
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                  </select>
+                </div>
+
+                <!-- Status -->
+                <div class="input-group flex-nowrap" style="margin-top: 10px">
+                  <label for="status" class="input-group-text">Status</label>
+                  <select class="form-select" id="status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn admin-submit-button">
+                  <i class="bx bx-user-plus" style="font-size: 1.2rem"></i> Add
+                </button>
+              </form>
             </div>
-
-            <!-- Program -->
-            <div class="input-group flex-nowrap" style="margin-top: 10px">
-              <span class="input-group-text" id="addon-wrapping"
-                >Program</span
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
               >
-              <input
-                type="text"
-                class="form-control"
-                placeholder="BS in Computer Engineering"
-                aria-label="Username"
-                aria-describedby="addon-wrapping"
-                id="program"
-              />
+                Close
+              </button>
             </div>
-
-            <div class="input-group flex-nowrap" style="margin-top: 10px">
-              <label for="school" class="input-group-text">School</label>
-              <select class="form-select" id="school">
-                <option value="USTP - CDO">USTP - CDO</option>
-                <option value="USTP - Alubijid">USTP - Alubijid</option>
-                <option value="USTP - Villanueva">USTP - Villanueva</option>
-                <option value="USTP - Claveria">USTP - Claveria</option>
-                <option value="USTP - Jasaan">USTP - Jasaan</option>
-              </select>
-            </div>
-
-            <!-- School Year  -->
-            <div class="input-group flex-nowrap" style="margin-top: 10px">
-              <label for="schoolYear" class="input-group-text">School Year</label>
-              <select class="form-select" id="schoolYear">
-                <option value="2021-2022">2021-2022</option>
-                <option value="2022-2023">2022-2023</option>
-                <option value="2023-2024">2023-2024</option>
-                <option value="2024-2025">2024-2025</option>
-                <option value="2025-2026">2025-2026</option>
-                <option value="2026-2027">2026-2027</option>
-                <option value="2027-2028">2027-2028</option>
-                <option value="2028-2029">2028-2029</option>
-                <option value="2029-2030">2029-2030</option>
-              </select>
-            </div>
-
-            <!-- School Year -->
-            <div class="input-group flex-nowrap" style="margin-top: 10px">
-              <label for="yearLevel" class="input-group-text">Year Level</label>
-              <select class="form-select" id="yearLevel">
-                <option value="1st Year">1st Year</option>
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-              </select>
-            </div>
-
-            <!-- Status -->
-            <div class="input-group flex-nowrap" style="margin-top: 10px">
-              <label for="status" class="input-group-text">Status</label>
-              <select class="form-select" id="status">
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-              </select>
-            </div>
-
-            <button type="submit" class="btn admin-submit-button">
-              <i class="bx bx-user-plus" style="font-size: 1.2rem"></i> Add
-            </button>
           </form>
         </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
-      </form>
       </div>
-    </div>
     </div>
 
     <script
@@ -328,7 +329,7 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    
+
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
@@ -336,91 +337,96 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.2.11/dist/jspdf.plugin.autotable.min.js"></script>
-    
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-      import {getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-      import {getDatabase, set, ref, child, onValue, get} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
- 
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+      import {
+        getDatabase,
+        set,
+        ref,
+        child,
+        onValue,
+        get,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
+        authDomain: "coisprojectmain.firebaseapp.com",
+        projectId: "coisprojectmain",
+        storageBucket: "coisprojectmain.appspot.com",
+        messagingSenderId: "666040501925",
+        appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
+      };
 
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+      const database = getDatabase(app);
 
+      document.addEventListener("DOMContentLoaded", function () {
+        scholarForm.addEventListener("submit", function (event) {
+          event.preventDefault();
 
-    // Initialize Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
-      authDomain: "coisprojectmain.firebaseapp.com",
-      projectId: "coisprojectmain",
-      storageBucket: "coisprojectmain.appspot.com",
-      messagingSenderId: "666040501925",
-      appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
-    };
+          var email = document.getElementById("exampleInputEmail1").value;
+          var firstName = document.getElementById("firstname").value;
+          var lastName = document.getElementById("lastname").value;
+          var middleName = document.getElementById("middlename").value;
+          var program = document.getElementById("program").value;
+          var school = document.getElementById("school").value;
+          var schoolYear = document.getElementById("schoolYear").value;
+          var yearLevel = document.getElementById("yearLevel").value;
+          var status = document.getElementById("status").value;
+          var password = "123456789";
 
-    const app = initializeApp (firebaseConfig);
-    const auth = getAuth();
-    const database = getDatabase (app);
+          // create sa user
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              // Store additional user data in Firebase Realtime Database
+              set(ref(database, "users/" + user.uid), {
+                email: email,
+                firstname: firstName,
+                lastname: lastName,
+                middlename: middleName,
+                fullname: firstName + "  " + middleName + "  " + lastName,
+                program: program,
+                school: school,
+                schoolyear: schoolYear,
+                status: status,
+                yearlevel: yearLevel,
+                password: password,
+              });
 
-    document.addEventListener("DOMContentLoaded", function () {
+              alert("User created!");
 
-      scholarForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-    var email = document.getElementById("exampleInputEmail1").value;
-    var firstName = document.getElementById('firstname').value;
-    var lastName = document.getElementById('lastname').value;
-    var middleName = document.getElementById('middlename').value;
-    var program = document.getElementById('program').value;
-    var school = document.getElementById('school').value;
-    var schoolYear = document.getElementById('schoolYear').value;
-    var yearLevel = document.getElementById('yearLevel').value;
-    var status = document.getElementById('status').value;
-    var password = "123456789";
-    
-// create sa user
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          // Store additional user data in Firebase Realtime Database
-          set(ref(database, 'users/' + user.uid), {
-            email: email,
-            firstname: firstName,
-            lastname: lastName,
-            middlename: middleName,
-            fullname: firstName + "  " + middleName + "  " + lastName,
-            program: program,
-            school: school,
-            schoolyear: schoolYear,
-            status: status,
-            yearlevel: yearLevel,
-            password: password
-          });
-
-          alert('User created!');
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          alert(errorMessage);
+              window.location.reload();
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              alert(errorMessage);
+            });
         });
-    });
-  });
+      });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const tableBody = document.getElementById('tableBody');
-    
+      document.addEventListener("DOMContentLoaded", function () {
+        const tableBody = document.getElementById("tableBody");
 
-    // Fetch data from Firebase collection (assuming 'users' is your collection)
-    const usersRef = ref(database, 'users');
+        // Fetch data from Firebase collection (assuming 'users' is your collection)
+        const usersRef = ref(database, "users");
 
-    get(usersRef)
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          snapshot.forEach((childSnapshot) => {
-            const data = childSnapshot.val();
-            // Populate table rows dynamically
-            const row = document.createElement('tr');
-            row.innerHTML = `
+        get(usersRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                // Populate table rows dynamically
+                const row = document.createElement("tr");
+                row.innerHTML = `
               <td>${data.firstname} ${data.middlename} ${data.lastname}</td>
               <td>${data.school}</td>
               <td>${data.program}</td>
@@ -428,74 +434,82 @@
               <td>${data.schoolyear}</td>
               <td>${data.status}</td>
             `;
-            tableBody.appendChild(row);
+                tableBody.appendChild(row);
+              });
+
+              // Initialize DataTables
+              $("#scholarTable").DataTable({
+                order: [[0, "asc"]], // Sort by the first column (Scholar Name)
+                paging: true, // Enable pagination
+                searching: true, // Enable search functionality
+              });
+            } else {
+              console.log("No data available");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching documents: ", error);
           });
 
-          // Initialize DataTables
-          $('#scholarTable').DataTable({
-            "order": [[0, "asc"]], // Sort by the first column (Scholar Name)
-            "paging": true, // Enable pagination
-            "searching": true // Enable search functionality
+        function generatePDF() {
+          const doc = new jsPDF("l"); // Create a new PDF document in landscape orientation
+
+          // Configure the columns and rows
+          const columns = [
+            "Scholar Name",
+            "School",
+            "Program",
+            "Year Level",
+            "School Year",
+            "Status",
+          ];
+          const rows = [];
+
+          // Populate the rows from the table
+          $("#scholarTable tbody tr").each(function (index, row) {
+            const rowData = [];
+            $(row)
+              .find("td")
+              .each(function (index, column) {
+                rowData.push($(column).text());
+              });
+            rows.push(rowData);
           });
-        } else {
-          console.log("No data available");
+
+          // Set table styles
+          const styles = {
+            textColor: [0, 0, 0], // Text color: Black
+            lineWidth: 0.2, // Border line width
+            lineColor: [0, 0, 0], // Border color: Black
+            valign: "middle", // Vertical alignment: Center
+            fontStyle: "normal", // Font style: Normal
+            fillColor: [255, 183, 3],
+            halign: "center", // Text alignment: Center
+          };
+
+          // Set header style for the first row
+          const headerStyles = {
+            fillColor: [255, 183, 3], // Background color: #ffb703 (light yellow)
+            fontStyle: "bold", // Bold font for the header
+          };
+
+          // Set table headers and add data to the PDF using AutoTable
+          doc.autoTable({
+            head: [columns],
+            body: rows,
+            startY: 10, // Start position for the table (optional)
+            styles: styles, // Apply the styles to the table
+            headStyles: { 0: { ...headerStyles } }, // Apply header style to the first row
+          });
+
+          // Save or open the PDF file
+          doc.save("scholar_data.pdf");
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching documents: ", error);
+
+        document
+          .getElementById("generatePDF")
+          .addEventListener("click", generatePDF);
       });
-
-
-    function generatePDF() {
-      const doc = new jsPDF('l'); // Create a new PDF document in landscape orientation
-
-      // Configure the columns and rows
-      const columns = ['Scholar Name', 'School', 'Program', 'Year Level', 'School Year', 'Status'];
-      const rows = [];
-
-      // Populate the rows from the table
-      $('#scholarTable tbody tr').each(function (index, row) {
-        const rowData = [];
-        $(row).find('td').each(function (index, column) {
-          rowData.push($(column).text());
-        });
-        rows.push(rowData);
-      });
-
-      // Set table styles
-      const styles = {
-        textColor: [0, 0, 0], // Text color: Black
-        lineWidth: 0.2, // Border line width
-        lineColor: [0, 0, 0], // Border color: Black
-        valign: 'middle', // Vertical alignment: Center
-        fontStyle: 'normal', // Font style: Normal
-        fillColor: [255, 183, 3],
-        halign: 'center', // Text alignment: Center
-      };
-
-      // Set header style for the first row
-      const headerStyles = {
-        fillColor: [255, 183, 3], // Background color: #ffb703 (light yellow)
-        fontStyle: 'bold', // Bold font for the header
-      };
-
-      // Set table headers and add data to the PDF using AutoTable
-      doc.autoTable({
-        head: [columns],
-        body: rows,
-        startY: 10, // Start position for the table (optional)
-        styles: styles, // Apply the styles to the table
-        headStyles: { 0: { ...headerStyles } }, // Apply header style to the first row
-      });
-
-      // Save or open the PDF file
-      doc.save('scholar_data.pdf');
-    }
-
-  document.getElementById('generatePDF').addEventListener('click', generatePDF);
-  });
-
-
-  </script>
+    </script>
   </body>
 </html>

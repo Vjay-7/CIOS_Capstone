@@ -46,13 +46,15 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" id="ScholarStatuslink3">Scholar Status</a>
+              <a class="dropdown-item" id="ScholarStatuslink3"
+                >Scholar Status</a
+              >
             </li>
             <li>
-              <a class="dropdown-item" href="../home-page-user.html?${userId}">Logout</a>
+              <a class="dropdown-item" href="../index.html?${userId}">Logout</a>
             </li>
           </ul>
-        </div>   
+        </div>
       </div>
     </nav>
 
@@ -70,14 +72,14 @@
           </li>
           <li class="list">
             <a class="nav-link" id="ScholarStatuslink">
-              <i class="bx bxs-dashboard icon"></i>
+              <i class="bx bxs-user-account icon"></i>
               <span class="link">Scholar Status</span>
             </a>
           </li>
           <li class="list">
             <a class="nav-link" id="notificationLink">
               <i class="bx bx-notification icon"></i>
-              <span class="link">Announcements</span>
+              <span class="link">Notifications</span>
             </a>
           </li>
           <li class="list">
@@ -99,15 +101,15 @@
             </a>
           </li>
           <li class="list">
-            <a  class="nav-link" id="DownlaodCSRlink">
+            <a class="nav-link" id="DownlaodCSRlink">
               <i class="bx bxs-download icon"></i>
-              <span class="link">Downlaod CSR</span>
+              <span class="link">Download CSR</span>
             </a>
           </li>
         </ul>
         <div class="bottom-content">
           <li class="list-bottom">
-            <a href="../home-page-user.html?${userId}" class="nav-link">
+            <a href="../index.html?${userId}" class="nav-link">
               <i class="bx bx-log-out icon"></i>
               <span class="link">Logout</span>
             </a>
@@ -174,9 +176,7 @@
               <h5
                 class="card-title"
                 style="font-size: 24.1px; font-weight: 600"
-                
               >
-              
                 Upload Attachments
               </h5>
               <p class="card-text" style="font-size: 14px">
@@ -263,8 +263,15 @@
             <div class="card-body" style="color: #fff">
               Scholar Status <i class="bx bxs-user-account icon-in"></i>
             </div>
-            <div class="card-footer d-flex align-items-center justify-content-between">
-              <a href="#" class="small text-white stretched-link" id="ScholarStatuslink1">View Details</a>
+            <div
+              class="card-footer d-flex align-items-center justify-content-between"
+            >
+              <a
+                href="#"
+                class="small text-white stretched-link"
+                id="ScholarStatuslink1"
+                >View Details</a
+              >
               <div class="small text-white">
                 <i class="bx bx-chevron-right"></i>
               </div>
@@ -323,60 +330,69 @@
 
     <script>
       function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
         var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
-    
-      var userId = getUrlParameter('uid');
-    
-      console.log('User ID:', userId); 
-      var notificationLink = document.getElementById('notificationLink');
-      var dashboardlink = document.getElementById('dashboardlink');
-      var ScholarStatuslink = document.getElementById('ScholarStatuslink');
-      var ScholarStatuslink1 = document.getElementById('ScholarStatuslink1');
-      var ScholarStatuslink2 = document.getElementById('ScholarStatuslink2');
-      var ScholarStatuslink3 = document.getElementById('ScholarStatuslink3');
-      var BrowseServicelink = document.getElementById('BrowseServicelink');
-      var ConnectAdminlink = document.getElementById('ConnectAdminlink');
-      var ConnectAdminlink1 = document.getElementById('ConnectAdminlink1');
-      var UploadAttachmentslink = document.getElementById('UploadAttachmentslink');
-      var UploadAttachmentslink1 = document.getElementById('UploadAttachmentslink1');
-      var DownlaodCSRlink = document.getElementById('DownlaodCSRlink');
-      var DownlaodCSRlink1 = document.getElementById('DownlaodCSRlink1');
-      var ViewRenderedServiceslink = document.getElementById('ViewRenderedServiceslink');
-    
 
-    
-        ScholarStatuslink.href = "user-scholar-status.html?uid=" + userId;
-        ScholarStatuslink1.href = "user-scholar-status.html?uid=" + userId;
-        ScholarStatuslink2.href = "user-scholar-status.html?uid=" + userId;
-        ScholarStatuslink3.href = "user-scholar-status.html?uid=" + userId;
-      
+      var userId = getUrlParameter("uid");
+
+      console.log("User ID:", userId);
+      var notificationLink = document.getElementById("notificationLink");
+      var dashboardlink = document.getElementById("dashboardlink");
+      var ScholarStatuslink = document.getElementById("ScholarStatuslink");
+      var ScholarStatuslink1 = document.getElementById("ScholarStatuslink1");
+      var ScholarStatuslink2 = document.getElementById("ScholarStatuslink2");
+      var ScholarStatuslink3 = document.getElementById("ScholarStatuslink3");
+      var BrowseServicelink = document.getElementById("BrowseServicelink");
+      var ConnectAdminlink = document.getElementById("ConnectAdminlink");
+      var ConnectAdminlink1 = document.getElementById("ConnectAdminlink1");
+      var UploadAttachmentslink = document.getElementById(
+        "UploadAttachmentslink"
+      );
+      var UploadAttachmentslink1 = document.getElementById(
+        "UploadAttachmentslink1"
+      );
+      var DownlaodCSRlink = document.getElementById("DownlaodCSRlink");
+      var DownlaodCSRlink1 = document.getElementById("DownlaodCSRlink1");
+      var ViewRenderedServiceslink = document.getElementById(
+        "ViewRenderedServiceslink"
+      );
+
+      ScholarStatuslink.href = "user-scholar-status.html?uid=" + userId;
+      ScholarStatuslink1.href = "user-scholar-status.html?uid=" + userId;
+      ScholarStatuslink2.href = "user-scholar-status.html?uid=" + userId;
+      ScholarStatuslink3.href = "user-scholar-status.html?uid=" + userId;
+
       if (userId && notificationLink) {
-        notificationLink.href = 'user-notification.html?uid=' + userId;
+        notificationLink.href = "user-notification.html?uid=" + userId;
       }
       if (userId && dashboardlink) {
-        dashboardlink.href = 'user-dashboard-main.html?uid=' + userId;
+        dashboardlink.href = "user-dashboard-main.html?uid=" + userId;
       }
       if (userId && BrowseServicelink) {
-        BrowseServicelink.href = 'user-browse-service.html?uid=' + userId;
+        BrowseServicelink.href = "user-browse-service.html?uid=" + userId;
       }
       if (userId && ConnectAdminlink && ConnectAdminlink1) {
-        ConnectAdminlink.href = 'user-connect-admin.html?uid=' + userId;
-        ConnectAdminlink1.href = 'user-connect-admin.html?uid=' + userId;
+        ConnectAdminlink.href = "user-connect-admin.html?uid=" + userId;
+        ConnectAdminlink1.href = "user-connect-admin.html?uid=" + userId;
       }
       if (userId && UploadAttachmentslink && UploadAttachmentslink1) {
-        UploadAttachmentslink.href = 'user-upload-attachments.html?uid=' + userId;
-        UploadAttachmentslink1.href = 'user-upload-attachments.html?uid=' + userId;
+        UploadAttachmentslink.href =
+          "user-upload-attachments.html?uid=" + userId;
+        UploadAttachmentslink1.href =
+          "user-upload-attachments.html?uid=" + userId;
       }
-      if (userId  && DownlaodCSRlink && DownlaodCSRlink1) {
-        DownlaodCSRlink.href = 'user-download.html?uid=' + userId;
-        DownlaodCSRlink1.href = 'user-download.html?uid=' + userId;
+      if (userId && DownlaodCSRlink && DownlaodCSRlink1) {
+        DownlaodCSRlink.href = "user-download.html?uid=" + userId;
+        DownlaodCSRlink1.href = "user-download.html?uid=" + userId;
       }
       if (userId && ViewRenderedServiceslink) {
-        ViewRenderedServiceslink.href = 'user-view-rendered-services.html?uid=' + userId;
+        ViewRenderedServiceslink.href =
+          "user-view-rendered-services.html?uid=" + userId;
       }
     </script>
   </body>
