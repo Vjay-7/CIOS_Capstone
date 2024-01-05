@@ -133,14 +133,7 @@
             Announcements
           </button>
         </div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#confirmToDelete"
-        >
-          sample rani veej sa modal
-        </button>
+   
       </nav>
 
       <nav class="row-content"></nav>
@@ -229,6 +222,51 @@
       </div>
     </div>
 
+
+        <!-- Modal for Asking if it would deletes an item -->
+
+        <div
+        class="modal fade"
+        id="confirmToDelete"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Delete a Feed Post
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete the post?
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary confirmDLTBtnColor">
+                Yes, delete the Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
     <!-- Modal Create Announcements-->
     <div
       class="modal fade"
@@ -472,9 +510,9 @@
                     >
                       View Details
                     </button>
-                    <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-post-key="${key}" data-bs-toggle="modal" data-bs-target="#questionToDelete">
+                    <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-post-key="${key}" data-bs-toggle="modal" data-bs-target="#confirmToDelete">
                       <i class="bx bx-trash"></i> Delete Item
-                    </button>
+                  </button>
                   </div>
                 </div>
               `;
@@ -494,26 +532,28 @@
               });
 
             // Attach event listener to the delete button
-            const deleteButton = newCard.querySelector(
-              ".admin-button-delete-itemrendered"
-            );
+            const deleteButton = newCard.querySelector(".admin-button-delete-itemrendered");
             deleteButton.addEventListener("click", function () {
-              const postKey = this.getAttribute("data-post-key");
-
-              // Reference to the specific post node you want to delete
-              const postRef = ref(database, `postannouncements/${postKey}`);
-
-              // Remove the post from the database
-              remove(postRef)
-                .then(() => {
-                  location.reload();
-                  alert(`Post deleted successfully.`);
-                  // Optionally, add code here for any additional actions after deletion
-                })
-                .catch((error) => {
-                  console.error(
-                    `Error deleting post ${postKey}: ${error.message}`
-                  );
+                const postKey = this.getAttribute("data-post-key");
+            
+                // Select the confirmation modal's 'Yes, delete' button
+                const confirmDeleteButton = document.querySelector(".confirmDLTBtnColor");
+            
+                // Add a click event listener to the confirmation button
+                confirmDeleteButton.addEventListener("click", function () {
+                    // Reference to the specific post node you want to delete
+                    const postRef = ref(database, `postannouncements/${postKey}`);
+            
+                    // Remove the post from the database
+                    remove(postRef)
+                        .then(() => {
+                            location.reload();
+                            alert(`Post deleted successfully.`);
+                            // Optionally, add code here for any additional actions after deletion
+                        })
+                        .catch((error) => {
+                            console.error(`Error deleting post ${postKey}: ${error.message}`);
+                        });
                 });
             });
 

@@ -25,232 +25,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <script type="module">
-      // Import the necessary Firebase functions
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-      import {
-        getDatabase,
-        ref as dbRef,
-        set,
-        get,
-      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-      import {
-        getStorage,
-        ref,
-        uploadBytes,
-        list,
-        getDownloadURL,
-        listAll,
-      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
-
-      import {
-        getAuth,
-        sendPasswordResetEmail,
-      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-
-      // Initialize Firebase
-      const firebaseConfig = {
-        apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
-        authDomain: "coisprojectmain.firebaseapp.com",
-        projectId: "coisprojectmain",
-        storageBucket: "coisprojectmain.appspot.com",
-        messagingSenderId: "666040501925",
-        appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const database = getDatabase(app);
-      const storage = getStorage(app);
-      const auth = getAuth(app);
-
-      function getUrlParameter(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-        var results = regex.exec(location.search);
-        return results === null
-          ? ""
-          : decodeURIComponent(results[1].replace(/\+/g, " "));
-      }
-
-      var userId = getUrlParameter("uid");
-      updateProfilePicture();
-      // Event listener for change password button
-      document
-        .getElementById("changePasswordButton")
-        .addEventListener("click", changePassword);
-
-      const userRef = dbRef(database, `users/${userId}`);
-      // Fetch user data
-      function fetchUserData() {
-        const userId = getUrlParameter("uid");
-        const userRef = dbRef(database, `users/${userId}`);
-
-        // Fetch user data
-        get(userRef)
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const userData = snapshot.val();
-              const fullName = userData.fullname;
-              const yearLevel = userData.yearlevel;
-              const program = userData.program;
-              const status = userData.status;
-              const schoolyear = userData.schoolyear;
-              const firstname = userData.firstname;
-              const middlename = userData.middlename;
-              const lasname = userData.lastname;
-              const school = userData.school;
-
-              // Update the HTML element with the retrieved full name
-              const fullNameSpan = document.getElementById("fullname");
-              const yearLevelSpan = document.getElementById("yearLevelS");
-              const yearLevelSpan2 = document.getElementById("yearLevelS2");
-              const programSpan1 = document.getElementById("programS");
-              const programSpan2 = document.getElementById("programS2");
-              const statusSpan = document.getElementById("statusS");
-              const schoolyearSpan = document.getElementById("schoolyearS");
-              const firstNameSpan = document.getElementById("firstNameS");
-              const middlenameSpan = document.getElementById("middlenameS");
-              const lasnameSpan = document.getElementById("lasnameS");
-              const schoolSpan = document.getElementById("schoolS");
-
-              if (fullNameSpan) {
-                fullNameSpan.textContent = fullName;
-              }
-              if (yearLevelSpan && yearLevelSpan2) {
-                yearLevelSpan2.textContent = yearLevelSpan.textContent =
-                  yearLevel;
-              }
-              if (programSpan1 && programSpan2) {
-                programSpan1.textContent = programSpan2.textContent = program;
-              }
-              if (statusSpan) {
-                statusSpan.textContent = status;
-              }
-              if (schoolyearSpan) {
-                schoolyearSpan.textContent = schoolyear;
-              }
-              if (firstNameSpan) {
-                firstNameSpan.textContent = firstname;
-              }
-              if (middlenameSpan) {
-                middlenameSpan.textContent = middlename;
-              }
-              if (lasnameSpan) {
-                lasnameSpan.textContent = lasname;
-              }
-              if (schoolSpan) {
-                schoolSpan.textContent = school;
-              }
-            } else {
-              console.log("No data available for this user");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching user data:", error);
-          });
-      }
-
-      // Call the function to fetch user data
-      fetchUserData();
-
-      function updateProfilePicture() {
-        const userId = getUrlParameter("uid"); // Replace this with your logic to get the user ID
-        const storageRef = ref(storage, `Users/${userId}/imageprofile`);
-
-        listAll(storageRef)
-          .then((res) => {
-            if (res.items.length > 0) {
-              // Sort items by their metadata (creation time)
-              const sortedItems = res.items.sort(
-                (a, b) => b.timeCreated - a.timeCreated
-              );
-
-              // Get the most recent item (first item after sorting)
-              const mostRecentItem = sortedItems[0];
-
-              // Fetch download URL for the most recent item
-              getDownloadURL(mostRecentItem).then((url) => {
-                const profilePic = document.getElementById("profilePic");
-                profilePic.src = url;
-              });
-            } else {
-              console.error("No images found in the folder");
-            }
-          })
-          .catch((error) => {
-            console.error("Error listing files:", error);
-          });
-      }
-
-      // Function to change password
-      function changePassword() {
-        const currentPassword = document.getElementById(
-          "floatingPasswordCurrent"
-        ).value;
-        const userId = getUrlParameter("uid");
-
-        // Retrieve user's email asynchronously
-        getUserEmail(userId)
-          .then((userEmail) => {
-            if (userEmail) {
-              // If new passwords match, proceed to change password in Firebase
-              const passwordRef = dbRef(database, `users/${userId}/password`);
-              get(passwordRef).then((snapshot) => {
-                const currentStoredPassword = snapshot.val();
-
-                if (currentStoredPassword === currentPassword) {
-                  // Password matches, send password reset email using the retrieved userEmail
-                  sendPasswordResetEmail(auth, userEmail)
-                    .then(() => {
-                      alert(
-                        "Password reset Email sent successfully to " + userEmail
-                      );
-                      // Display a success message or perform other actions
-                    })
-                    .catch((error) => {
-                      console.error(
-                        "Error sending password reset email:",
-                        error
-                      );
-                      // Handle errors, display an error message, etc.
-                    });
-                } else {
-                  alert("Current password is incorrect.");
-                  // Handle incorrect current password error here
-                }
-              });
-            } else {
-              console.log("User email not found");
-              // Handle user email not found error here
-            }
-          })
-          .catch((error) => {
-            console.error("Error getting user email:", error);
-          });
-      }
-
-      // Function to retrieve user's email asynchronously
-      function getUserEmail(userId) {
-        const userRef = dbRef(database, `users/${userId}/email`);
-
-        // Fetch user data and return a Promise
-        return get(userRef)
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const userEmail = snapshot.val();
-              console.log("User email:", userEmail);
-              return userEmail; // Return the userEmail if it exists
-            } else {
-              console.log("No data available for this user");
-              return null; // Return null if userEmail doesn't exist
-            }
-          })
-          .catch((error) => {
-            console.error("Error getting user email:", error);
-            throw error; // Throw an error for error handling
-          });
-      }
-    </script>
+ 
   </head>
   <body>
     <nav class="navbar">
@@ -531,6 +306,16 @@
       </div>
     </main>
 
+
+        <!-- Spinner -->
+        <div id="spinner" class="spinner"></div>
+
+        <!-- Success Notification -->
+        <div id="successNotification" class="success-notification">
+          <span style="margin-right: 5px;">File uploaded successfully</span>
+          <i class="bx bx-check-circle" style="color: #5cb85c;"></i> <!-- Checkmark icon -->
+        </div>
+
     <!-- Modal for Upload Profile Picture -->
     <div
       class="modal fade"
@@ -559,12 +344,7 @@
               <label for="profilePicture" class="form-label"
                 >Upload Profile Picture</label
               >
-              <input
-                class="form-control"
-                type="file"
-                id="profilePictureInput"
-                onchange="chooseFile('profile')"
-              />
+              <input class="form-control" type="file" id="profilePictureInput" onchange="chooseFile('profile')" />
             </div>
           </div>
           <div class="modal-footer">
@@ -699,6 +479,289 @@
         ViewRenderedServiceslink.href =
           "user-view-rendered-services.html?uid=" + userId;
       }
+    </script>
+
+    <script type="module">
+      // Import the necessary Firebase functions
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref as dbRef,
+        set,
+        get,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+      import {
+        getStorage,
+        ref,
+        uploadBytes,
+        list,
+        getDownloadURL,
+        listAll,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+
+      import {
+        getAuth,
+        sendPasswordResetEmail,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyAXTWA8tDgh36kHxr3oiI2mdZk4xN1ExIU",
+        authDomain: "coisprojectmain.firebaseapp.com",
+        projectId: "coisprojectmain",
+        storageBucket: "coisprojectmain.appspot.com",
+        messagingSenderId: "666040501925",
+        appId: "1:666040501925:web:a53d190dbffca2ceac2f4c",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const storage = getStorage(app);
+      const auth = getAuth(app);
+
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      var userId = getUrlParameter("uid");
+      updateProfilePicture();
+      // Event listener for change password button
+      document
+        .getElementById("changePasswordButton")
+        .addEventListener("click", changePassword);
+
+      const userRef = dbRef(database, `users/${userId}`);
+      // Fetch user data
+      function fetchUserData() {
+        const userId = getUrlParameter("uid");
+        const userRef = dbRef(database, `users/${userId}`);
+
+        // Fetch user data
+        get(userRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const userData = snapshot.val();
+              const fullName = userData.fullname;
+              const yearLevel = userData.yearlevel;
+              const program = userData.program;
+              const status = userData.status;
+              const schoolyear = userData.schoolyear;
+              const firstname = userData.firstname;
+              const middlename = userData.middlename;
+              const lasname = userData.lastname;
+              const school = userData.school;
+
+              // Update the HTML element with the retrieved full name
+              const fullNameSpan = document.getElementById("fullname");
+              const yearLevelSpan = document.getElementById("yearLevelS");
+              const yearLevelSpan2 = document.getElementById("yearLevelS2");
+              const programSpan1 = document.getElementById("programS");
+              const programSpan2 = document.getElementById("programS2");
+              const statusSpan = document.getElementById("statusS");
+              const schoolyearSpan = document.getElementById("schoolyearS");
+              const firstNameSpan = document.getElementById("firstNameS");
+              const middlenameSpan = document.getElementById("middlenameS");
+              const lasnameSpan = document.getElementById("lasnameS");
+              const schoolSpan = document.getElementById("schoolS");
+
+              if (fullNameSpan) {
+                fullNameSpan.textContent = fullName;
+              }
+              if (yearLevelSpan && yearLevelSpan2) {
+                yearLevelSpan2.textContent = yearLevelSpan.textContent =
+                  yearLevel;
+              }
+              if (programSpan1 && programSpan2) {
+                programSpan1.textContent = programSpan2.textContent = program;
+              }
+              if (statusSpan) {
+                statusSpan.textContent = status;
+              }
+              if (schoolyearSpan) {
+                schoolyearSpan.textContent = schoolyear;
+              }
+              if (firstNameSpan) {
+                firstNameSpan.textContent = firstname;
+              }
+              if (middlenameSpan) {
+                middlenameSpan.textContent = middlename;
+              }
+              if (lasnameSpan) {
+                lasnameSpan.textContent = lasname;
+              }
+              if (schoolSpan) {
+                schoolSpan.textContent = school;
+              }
+            } else {
+              console.log("No data available for this user");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+      }
+
+      // Call the function to fetch user data
+      fetchUserData();
+
+      function updateProfilePicture() {
+        const userId = getUrlParameter("uid"); // Replace this with your logic to get the user ID
+        const storageRef = ref(storage, `Users/${userId}/imageprofile`);
+
+        listAll(storageRef)
+          .then((res) => {
+            if (res.items.length > 0) {
+              // Sort items by their metadata (creation time)
+              const sortedItems = res.items.sort(
+                (a, b) => b.timeCreated - a.timeCreated
+              );
+
+              // Get the most recent item (first item after sorting)
+              const mostRecentItem = sortedItems[0];
+
+              // Fetch download URL for the most recent item
+              getDownloadURL(mostRecentItem).then((url) => {
+                const profilePic = document.getElementById("profilePic");
+                profilePic.src = url;
+              });
+            } else {
+              console.error("No images found in the folder");
+            }
+          })
+          .catch((error) => {
+            console.error("Error listing files:", error);
+          });
+      }
+
+      // Function to change password
+      function changePassword() {
+        const currentPassword = document.getElementById(
+          "floatingPasswordCurrent"
+        ).value;
+        const userId = getUrlParameter("uid");
+
+        // Retrieve user's email asynchronously
+        getUserEmail(userId)
+          .then((userEmail) => {
+            if (userEmail) {
+              // If new passwords match, proceed to change password in Firebase
+              const passwordRef = dbRef(database, `users/${userId}/password`);
+              get(passwordRef).then((snapshot) => {
+                const currentStoredPassword = snapshot.val();
+
+                if (currentStoredPassword === currentPassword) {
+                  // Password matches, send password reset email using the retrieved userEmail
+                  sendPasswordResetEmail(auth, userEmail)
+                    .then(() => {
+                      alert(
+                        "Password reset Email sent successfully to " + userEmail
+                      );
+                      // Display a success message or perform other actions
+                    })
+                    .catch((error) => {
+                      console.error(
+                        "Error sending password reset email:",
+                        error
+                      );
+                      // Handle errors, display an error message, etc.
+                    });
+                } else {
+                  alert("Current password is incorrect.");
+                  // Handle incorrect current password error here
+                }
+              });
+            } else {
+              console.log("User email not found");
+              // Handle user email not found error here
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting user email:", error);
+          });
+      }
+
+      // Function to retrieve user's email asynchronously
+      function getUserEmail(userId) {
+        const userRef = dbRef(database, `users/${userId}/email`);
+
+        // Fetch user data and return a Promise
+        return get(userRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const userEmail = snapshot.val();
+              console.log("User email:", userEmail);
+              return userEmail; // Return the userEmail if it exists
+            } else {
+              console.log("No data available for this user");
+              return null; // Return null if userEmail doesn't exist
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting user email:", error);
+            throw error; // Throw an error for error handling
+          });
+      }
+
+      function chooseFile(type) {
+        const fileInput = document.getElementById(
+          type === 'profile' ? 'profilePictureInput' : type === 'grades' ? 'formFileGrades' : 'formFileServices'
+        );
+        const file = fileInput.files[0];
+
+        if (file) {
+          const userId = getUserId();
+          const folderName = type === 'grades' ? 'complete_grades' : type === 'services' ? 'rendered_services' : 'imageprofile';
+          const storageRef = ref(storage, `Users/${userId}/${folderName}/${file.name}`);
+
+          const spinner = document.getElementById('spinner');
+          spinner.style.display = 'block'; // Show the spinner
+
+          uploadBytes(storageRef, file)
+            .then((snapshot) => {
+              spinner.style.display = 'none'; // Hide the spinner
+              const successNotification = document.getElementById('successNotification');
+              successNotification.style.display = 'flex'; // Show success notification
+              setTimeout(() => {
+                successNotification.style.display = 'none'; // Hide success notification after 2 seconds
+              }, 2000);
+
+              console.log(`File (${type}) uploaded successfully`);
+              if (type === 'profile') {
+                console.log('Profile picture uploaded successfully');
+              }
+              // You can get the download URL of the uploaded file here if needed
+            })
+            .catch((error) => {
+              spinner.style.display = 'none'; // Hide the spinner on error
+              console.error(`Error uploading file (${type}):`, error);
+            });
+        } else {
+          console.error(`No file selected for (${type})`);
+        }
+      }
+
+         // Event listener for the file input change
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach((fileInput) => {
+      fileInput.addEventListener('change', (event) => {
+        const fileType = event.target.id === 'formFileGrades' ? 'grades' : event.target.id === 'formFileServices' ? 'services' : 'profile';
+        chooseFile(fileType);
+      });
+    });
+
+      // Function to retrieve the user's UID (replace this with your actual logic)
+  function getUserId() {
+    // Replace this with the logic to fetch the user's UID
+    // For example, if you have it in the URL parameter:
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('uid');
+  }
+      
     </script>
   </body>
 </html>

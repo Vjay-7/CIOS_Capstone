@@ -607,7 +607,7 @@
                 <p class="card-text admin-notif-text-render">${postData.when}</p>
                 <!-- Add other HTML elements here to display more data -->
                 <button type="button" class="btn btn-primary admin-notif-btn-render" data-bs-toggle="modal" data-bs-target="#staticBackdrop-content1" data-bs-content="${key}">View More Details</button>
-                <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-post-key="${key}" data-bs-toggle="modal" data-bs-target="#questionToDelete">
+                <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-post-key="${key}" data-bs-toggle="modal" data-bs-target="#confirmToDelete">
                   <i class="bx bx-trash"></i> Delete Item
                 </button>
               </div>
@@ -642,6 +642,10 @@
             deleteButton.addEventListener("click", function () {
               const postKey = this.getAttribute("data-post-key");
 
+               // Select the confirmation modal's 'Yes, delete' button
+               const confirmDeleteButton = document.querySelector(".confirmDLTBtnColor");
+              // Add a click event listener to the confirmation button
+              confirmDeleteButton.addEventListener("click", function () {
               // Reference to the specific post node you want to delete
               const postRef = ref(database, `posts/${postKey}`);
 
@@ -657,6 +661,7 @@
                     `Error deleting post ${postKey}: ${error.message}`
                   );
                 });
+              });
             });
 
             // Append the newly created card to the card container

@@ -141,6 +141,10 @@
         .inactive-status {
           background-color: red;
         }
+
+        .pending-status {
+          background-color: rgba(224, 195, 9, 0.964); /* Set the color to yellow or any other preferred color */
+        }
       </style>
       
 
@@ -166,6 +170,8 @@
           </table>
         </div>
       </div>
+
+    
 
     
     </main>
@@ -240,19 +246,14 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button
-            type="button"
-            class="btn btn-primary admin-createbrowse-button"
-          >
-            Verified
-          </button>
-          <button
-          type="button"
-          class="btn btn-danger admin-createbrowse-button"
-          >
-          Failed
+            <button type="button" class="btn btn-primary admin-createbrowse-button">
+              Verified
             </button>
-        
+            <button type="button" class="btn btn-warning admin-createbrowse-button">
+              Pending
+            </button>
+            <button type="button" class="btn btn-danger admin-createbrowse-button">
+              Failed
             </button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
@@ -322,6 +323,7 @@
                         <select class="form-select status-dropdown" data-uid="${childSnapshot.key}">
                           <option value="Passed" ${data.status === 'Passed' ? 'selected' : ''}>Passed</option>
                           <option value="Failed" ${data.status === 'Failed' ? 'selected' : ''}>Failed</option>
+                          <option value="Pending" ${data.status === 'Pending' ? 'selected' : ''}>Pending</option>
                         </select>
                       </td>
                       <td>
@@ -360,22 +362,23 @@
                       });
                     });
                     
-                    // Add event listener to the status dropdown
-                    const statusDropdown = row.querySelector('.status-dropdown');
-                    updateDropdownColor(statusDropdown); // Initial call to set the dropdown color
-                    statusDropdown.addEventListener('change', (event) => {
-                      const selectedStatus = event.target.value;
-                      const userKey = event.target.dataset.uid;
-                      // Update the status in Firebase database when the dropdown value changes
-                      set(child(dbRef(database, `users/${userKey}`), 'status'), selectedStatus)
-                        .then(() => {
-                          console.log('Status updated successfully');
-                          updateDropdownColor(statusDropdown); // Update dropdown color after selection change
-                        })
-                        .catch((error) => {
-                          console.error('Error updating status: ', error);
-                        });
-                    });
+                      // Add event listener to the status dropdown
+                      const statusDropdown = row.querySelector('.status-dropdown');
+                      updateDropdownColor(statusDropdown); // Initial call to set the dropdown color
+                      statusDropdown.addEventListener('change', (event) => {
+                        const selectedStatus = event.target.value;
+                        const userKey = event.target.dataset.uid;
+                        // Update the status in Firebase database when the dropdown value changes
+                        set(child(dbRef(database, `users/${userKey}`), 'status'), selectedStatus)
+                          .then(() => {
+                            console.log('Status updated successfully');
+                            updateDropdownColor(statusDropdown); // Update dropdown color after selection change
+                          })
+                          .catch((error) => {
+                            console.error('Error updating status: ', error);
+                          });
+                      });
+
                     const verifyButtons = document.querySelectorAll('.admin-verify-button');
                     verifyButtons.forEach((button) => {
                       button.addEventListener('click', async (event) => {
@@ -389,6 +392,7 @@
                         const renderedServiceImage = modalContent.querySelector('#renderedServiceImage');
                         const verifiedButton = modalContent.querySelector('.btn.btn-primary');
                         const failedButton = modalContent.querySelector('.btn.btn-danger');
+                        const pendingButton = modalContent.querySelector('.btn.btn-warning');
 
                         try {
                           const imageProfileRef = ref(storage, `Users/${userId}/rendered_services`);
@@ -424,9 +428,25 @@
                             if (!alertShown) {
                               alert(`Status updated to "${newStatus}"`);
                               alertShown = true; // Set the flag to true after the alert is shown
+                              location.reload();
                             }
                           } catch (error) {
                             alert(`Error updating status to "${newStatus}":`, error);
+                          }
+                          });
+
+                          pendingButton.addEventListener('click', async () => {
+                            const newStatus = "Pending";
+                            try {
+                            await set(dbRef(database, `users/${userId}/status`), newStatus);
+                            if (!alertShown) {
+                              alert(`Status updated to "${newStatus}"`);
+                              location.reload();
+                              alertShown = true; // Set the flag to true after the alert is shown
+                            }
+                          } catch (error) {
+                            alert(`Error updating status to "${newStatus}":`, error);
+                            location.reload();
                           }
                           });
                         } catch (error) {
@@ -457,16 +477,21 @@
 
               
 
-              // Function to update the dropdown color based on the selected option
-             function updateDropdownColor(dropdown) {
-              if (dropdown.value === 'Passed') {
-                dropdown.classList.remove('inactive-status');
-                dropdown.classList.add('active-status');
-              } else if (dropdown.value === 'Failed') {
-                dropdown.classList.remove('active-status');
-                dropdown.classList.add('inactive-status');
+              function updateDropdownColor(dropdown) {
+                if (dropdown.value === 'Passed') {
+                  dropdown.classList.remove('inactive-status');
+                  dropdown.classList.remove('pending-status');
+                  dropdown.classList.add('active-status');
+                } else if (dropdown.value === 'Failed') {
+                  dropdown.classList.remove('active-status');
+                  dropdown.classList.remove('pending-status');
+                  dropdown.classList.add('inactive-status');
+                } else if (dropdown.value === 'Pending') {
+                  dropdown.classList.remove('active-status');
+                  dropdown.classList.remove('inactive-status');
+                  dropdown.classList.add('pending-status');
+                }
               }
-            }
           });
           
     </script>
