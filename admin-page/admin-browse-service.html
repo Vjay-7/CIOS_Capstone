@@ -519,6 +519,7 @@
               await set(ref(database, `posts/post${postCount}`), postData);
 
               alert("Posted successfully");
+              window.location.reload();
 
               // Call the function to handle file selection
               await chooseFile("postpic", postCount); // Wait for file upload to finish
@@ -642,25 +643,27 @@
             deleteButton.addEventListener("click", function () {
               const postKey = this.getAttribute("data-post-key");
 
-               // Select the confirmation modal's 'Yes, delete' button
-               const confirmDeleteButton = document.querySelector(".confirmDLTBtnColor");
+              // Select the confirmation modal's 'Yes, delete' button
+              const confirmDeleteButton = document.querySelector(
+                ".confirmDLTBtnColor"
+              );
               // Add a click event listener to the confirmation button
               confirmDeleteButton.addEventListener("click", function () {
-              // Reference to the specific post node you want to delete
-              const postRef = ref(database, `posts/${postKey}`);
+                // Reference to the specific post node you want to delete
+                const postRef = ref(database, `posts/${postKey}`);
 
-              // Remove the post from the database
-              remove(postRef)
-                .then(() => {
-                  location.reload();
-                  alert(`Post deleted successfully.`);
-                  // Optionally, add code here for any additional actions after deletion
-                })
-                .catch((error) => {
-                  console.error(
-                    `Error deleting post ${postKey}: ${error.message}`
-                  );
-                });
+                // Remove the post from the database
+                remove(postRef)
+                  .then(() => {
+                    location.reload();
+                    alert(`Post deleted successfully.`);
+                    // Optionally, add code here for any additional actions after deletion
+                  })
+                  .catch((error) => {
+                    console.error(
+                      `Error deleting post ${postKey}: ${error.message}`
+                    );
+                  });
               });
             });
 

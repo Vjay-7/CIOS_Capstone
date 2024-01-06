@@ -133,7 +133,6 @@
             Announcements
           </button>
         </div>
-   
       </nav>
 
       <nav class="row-content"></nav>
@@ -222,51 +221,49 @@
       </div>
     </div>
 
+    <!-- Modal for Asking if it would deletes an item -->
 
-        <!-- Modal for Asking if it would deletes an item -->
-
-        <div
-        class="modal fade"
-        id="confirmToDelete"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                Delete a Feed Post
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to delete the post?
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary confirmDLTBtnColor">
-                Yes, delete the Item
-              </button>
-            </div>
+    <div
+      class="modal fade"
+      id="confirmToDelete"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Delete a Feed Post
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete the post?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary confirmDLTBtnColor">
+              Yes, delete the Item
+            </button>
           </div>
         </div>
       </div>
+    </div>
 
-      
     <!-- Modal Create Announcements-->
     <div
       class="modal fade"
@@ -337,6 +334,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Email message to users -->
 
     <!-- Modal for Asking if it would deletes an item -->
     <div
@@ -456,8 +455,9 @@
                 ref(database, `postannouncements/ann${postCount}`),
                 postData
               );
-              location.reload();
               alert("Posted successfully");
+              window.location.reload();
+              // Send Email notification to scholars
             } catch (error) {
               console.error("Error writing document: ", error);
             }
@@ -532,29 +532,36 @@
               });
 
             // Attach event listener to the delete button
-            const deleteButton = newCard.querySelector(".admin-button-delete-itemrendered");
+            const deleteButton = newCard.querySelector(
+              ".admin-button-delete-itemrendered"
+            );
             deleteButton.addEventListener("click", function () {
-                const postKey = this.getAttribute("data-post-key");
-            
-                // Select the confirmation modal's 'Yes, delete' button
-                const confirmDeleteButton = document.querySelector(".confirmDLTBtnColor");
-            
-                // Add a click event listener to the confirmation button
-                confirmDeleteButton.addEventListener("click", function () {
-                    // Reference to the specific post node you want to delete
-                    const postRef = ref(database, `postannouncements/${postKey}`);
-            
-                    // Remove the post from the database
-                    remove(postRef)
-                        .then(() => {
-                            location.reload();
-                            alert(`Post deleted successfully.`);
-                            // Optionally, add code here for any additional actions after deletion
-                        })
-                        .catch((error) => {
-                            console.error(`Error deleting post ${postKey}: ${error.message}`);
-                        });
-                });
+              const postKey = this.getAttribute("data-post-key");
+
+              // Select the confirmation modal's 'Yes, delete' button
+              const confirmDeleteButton = document.querySelector(
+                ".confirmDLTBtnColor"
+              );
+
+              // Add a click event listener to the confirmation button
+              confirmDeleteButton.addEventListener("click", function () {
+                // Reference to the specific post node you want to delete
+                const postRef = ref(database, `postannouncements/${postKey}`);
+
+                // Remove the post from the database
+                remove(postRef)
+                  .then(() => {
+                    location.reload();
+                    alert(`Post deleted successfully.`);
+                    window.location.reload();
+                    // Optionally, add code here for any additional actions after deletion
+                  })
+                  .catch((error) => {
+                    console.error(
+                      `Error deleting post ${postKey}: ${error.message}`
+                    );
+                  });
+              });
             });
 
             if (cardContainer) {
