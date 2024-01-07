@@ -342,6 +342,14 @@
         let alertShown = false;
         const tableBody = document.getElementById("tableBody");
       
+         // Ensure the DOM is loaded before getting the search input
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('keyup', searchTable);
+  } else {
+    console.error('Search input not found!');
+  }
+  
         // Fetch data from Firebase collection (assuming 'users' is your collection)
         const usersRef = dbRef(database, "users");
       
@@ -394,7 +402,7 @@
                   </td>
                 `;
                 tableBody.appendChild(row);
-      
+
                 // Add event listener to the status dropdown
                 const statusDropdown = row.querySelector(".status-dropdown");
                 updateDropdownColor(statusDropdown); // Initial call to set the dropdown color
@@ -548,16 +556,7 @@
                 });
               });
 
-      // Initialize DataTables
-      const table = $("#scholarTable").DataTable({
-        order: [[0, "asc"]], // Sort by the first column (Scholar Name)
-        paging: true, // Enable pagination
-        searching: true, // Enable search functionality
-      });
-            // Search functionality
-            $('#searchInput').on('keyup', function () {
-              table.search(this.value).draw();
-            });
+
             } else {
             console.log("No data available");
             }
@@ -565,6 +564,7 @@
             .catch((error) => {
             console.error("Error fetching documents: ", error);
           });
+
 
         function updateDropdownColor(dropdown) {
           if (dropdown.value === "Passed") {
@@ -606,8 +606,35 @@
             });
         }
       
-
-
+        function searchTable() {
+          const input = document.getElementById('searchInput');
+          const filter = input.value.toUpperCase();
+          const table = document.getElementById('scholarTable');
+          const tbody = table.getElementsByTagName('tbody');
+          const tr = tbody[0].getElementsByTagName('tr');
+          
+          for (let i = 0; i < tr.length; i++) {
+            const tdName = tr[i].getElementsByTagName('td')[0]; // Change index to match the column where the name is
+            const tdStatus = tr[i].querySelector('.status-dropdown'); // Get the status dropdown element
+            
+            if (tdName && tdStatus) {
+              const txtValueName = tdName.textContent || tdName.innerText;
+              const selectedStatus = tdStatus.value.toUpperCase(); // Get the selected status from the dropdown
+              
+              if (
+                txtValueName.toUpperCase().indexOf(filter) > -1 || // Check against the name
+                selectedStatus.indexOf(filter) > -1  // Check against the selected status
+              ) {
+                tr[i].style.display = '';
+              } else {
+                tr[i].style.display = 'none';
+              }
+            }
+          }
+        }
+        
+        
+        
 
 
 
