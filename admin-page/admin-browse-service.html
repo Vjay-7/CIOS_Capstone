@@ -428,6 +428,15 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+
+    <script type="text/javascript">
+      (function(){
+          emailjs.init("LGwRLRAB3Qbxl-A1p");
+      })();
+    </script>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
@@ -519,11 +528,12 @@
               await set(ref(database, `posts/post${postCount}`), postData);
 
               alert("Posted successfully");
+              //window.location.reload();
 
               // Call the function to handle file selection
               await chooseFile("postpic", postCount); // Wait for file upload to finish
-
-              location.reload(); // Reloading after uploading the file might not be necessary, consider removing
+              await fetchUserEmailsAndSendEmail(postData);
+              //location.reload(); // Reloading after uploading the file might not be necessary, consider removing
             } catch (error) {
               console.error("Error writing document: ", error);
             }
@@ -561,6 +571,57 @@
             console.error(`No file selected for (${type})`);
           }
         }
+        async function fetchUserEmailsAndSendEmail(postData) {
+          const usersRef = ref(database, 'users');
+      
+          try {
+            const snapshot = await get(usersRef);
+            const users = snapshot.val();
+      
+            if (users) {
+              const userIds = Object.keys(users);
+              const userEmails = userIds.map(userId => users[userId].email).filter(isValidEmail);
+      
+              if (userEmails.length > 0) {
+                await sendEmailToAll(postData, userEmails);
+              } else {
+                console.log('No valid users found in the database');
+              }
+            } else {
+              console.log('No users found in the database');
+            }
+          } catch (error) {
+            console.error('Error fetching user emails:', error);
+          }
+        }
+      
+        async function sendEmailToAll(postData, userEmails) {
+          const emailParams = {
+            to_name: "ISDA Scholars",
+            from_name: "City Scholarship Office",
+            message: "The City Scholarship Office has released a **New Render Service**. Please visit https://cityscholarship-onlineinfo.netlify.app/ for further details",
+            bcc: userEmails.join(','), // BCC all emails at once 
+            from_email: "dandasan.veejay7@gmail.com", // Replace with your email
+          };
+      
+          try {
+            await emailjs.send("service_eth3yyb1", "template_x3g9n1w", emailParams);
+            console.log(`Email sent to all recipients!`);
+            alert("All valid emails sent successfully!");
+            location.reload();
+          } catch (error) {
+            console.error(`Failed to send email to all recipients:`, error);
+            alert("Failed to send emails");
+          }
+        }
+
+                // Function to validate email addresses
+                function isValidEmail(email) {
+                  return /\S+@\S+\.\S+/.test(email);
+                }
+      
+      
+      
       });
 
       //////////// POST STATIC DISPLAY FROM FIREBASE
@@ -607,7 +668,7 @@
                 <p class="card-text admin-notif-text-render">${postData.when}</p>
                 <!-- Add other HTML elements here to display more data -->
                 <button type="button" class="btn btn-primary admin-notif-btn-render" data-bs-toggle="modal" data-bs-target="#staticBackdrop-content1" data-bs-content="${key}">View More Details</button>
-                <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-post-key="${key}" data-bs-toggle="modal" data-bs-target="#questionToDelete">
+                <button type="button" class="btn btn-primary admin-button-delete-itemrendered" data-post-key="${key}" data-bs-toggle="modal" data-bs-target="#confirmToDelete">
                   <i class="bx bx-trash"></i> Delete Item
                 </button>
               </div>
@@ -642,21 +703,28 @@
             deleteButton.addEventListener("click", function () {
               const postKey = this.getAttribute("data-post-key");
 
-              // Reference to the specific post node you want to delete
-              const postRef = ref(database, `posts/${postKey}`);
+              // Select the confirmation modal's 'Yes, delete' button
+              const confirmDeleteButton = document.querySelector(
+                ".confirmDLTBtnColor"
+              );
+              // Add a click event listener to the confirmation button
+              confirmDeleteButton.addEventListener("click", function () {
+                // Reference to the specific post node you want to delete
+                const postRef = ref(database, `posts/${postKey}`);
 
-              // Remove the post from the database
-              remove(postRef)
-                .then(() => {
-                  location.reload();
-                  alert(`Post deleted successfully.`);
-                  // Optionally, add code here for any additional actions after deletion
-                })
-                .catch((error) => {
-                  console.error(
-                    `Error deleting post ${postKey}: ${error.message}`
-                  );
-                });
+                // Remove the post from the database
+                remove(postRef)
+                  .then(() => {
+                    location.reload();
+                    alert(`Post deleted successfully.`);
+                    // Optionally, add code here for any additional actions after deletion
+                  })
+                  .catch((error) => {
+                    console.error(
+                      `Error deleting post ${postKey}: ${error.message}`
+                    );
+                  });
+              });
             });
 
             // Append the newly created card to the card container

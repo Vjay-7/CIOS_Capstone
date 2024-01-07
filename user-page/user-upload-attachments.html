@@ -1094,36 +1094,6 @@
         });
       });
 
-      function updateProfilePicture() {
-        const userId = getUserId(); // Replace this with your logic to get the user ID
-        const storageRef = ref(storage, `Users/${userId}/imageprofile`);
-
-        listAll(storageRef)
-          .then((res) => {
-            if (res.items.length > 0) {
-              // Sort items by their metadata (creation time)
-              const sortedItems = res.items.sort(
-                (a, b) => b.timeCreated - a.timeCreated
-              );
-
-              // Get the most recent item (first item after sorting)
-              const mostRecentItem = sortedItems[0];
-
-              // Fetch download URL for the most recent item
-              getDownloadURL(mostRecentItem).then((url) => {
-                const profilePic = document.getElementById("profilePic");
-                profilePic.src = url;
-              });
-            } else {
-              console.error("No images found in the folder");
-            }
-          })
-          .catch((error) => {
-            console.error("Error listing files:", error);
-          });
-      }
-      // Call the function to update the profile picture
-      updateProfilePicture();
 
       ////// Display Text for grade select
       const gradeSelect = document.getElementById("gradeSelect");
