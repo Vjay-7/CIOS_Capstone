@@ -608,6 +608,7 @@
             await emailjs.send("service_eth3yyb1", "template_x3g9n1w", emailParams);
             console.log(`Email sent to all recipients!`);
             alert("All valid emails sent successfully!");
+            location.reload();
           } catch (error) {
             console.error(`Failed to send email to all recipients:`, error);
             alert("Failed to send emails");
